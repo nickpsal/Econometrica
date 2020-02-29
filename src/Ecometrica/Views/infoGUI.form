@@ -83,28 +83,28 @@
                                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="158" max="-2" attributes="0"/>
-                                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="107" max="-2" attributes="0"/>
-                                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel7" min="-2" pref="404" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="168" max="-2" attributes="0"/>
                                   <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="158" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
                   </Group>
                   <EmptySpace pref="56" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="175" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -131,8 +131,8 @@
                   <Component id="jLabel7" min="-2" pref="24" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel8" min="-2" pref="24" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="okBtn" pref="48" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                  <Component id="okBtn" pref="42" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -202,7 +202,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&#x39c;&#x391;&#x3a1;&#x399;&#x391; &#x3a0;&#x391;&#x3a0;&#x391;&#x3a1;&#x391; - std095190@ac.eap.gr"/>
+            <Property name="text" type="java.lang.String" value="&#x39c;&#x391;&#x3a1;&#x399;&#x391; &#x3a0;&#x391;&#x3a0;&#x391;&#x3a1;&#x391; - std095190"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
@@ -213,7 +213,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&#x3a4;&#x396;&#x399;&#x3a4;&#x396;&#x399;&#x3a1;&#x391; &#x391;&#x399;&#x39a;&#x391;&#x3a4;&#x395;&#x3a1;&#x399;&#x39d;&#x397; - std114303@ac.eap.gr"/>
+            <Property name="text" type="java.lang.String" value="&#x3a4;&#x396;&#x399;&#x3a4;&#x396;&#x399;&#x3a1;&#x391; &#x391;&#x399;&#x39a;&#x391;&#x3a4;&#x395;&#x3a1;&#x399;&#x39d;&#x397; - std114303"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel8">
@@ -224,7 +224,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&#x3a8;&#x391;&#x39b;&#x3a4;&#x391;&#x39a;&#x397;&#x3a3; &#x39d;&#x399;&#x39a;&#x39f;&#x39b;&#x391;&#x39f;&#x3a3; - std080926@ac.eap.gr"/>
+            <Property name="text" type="java.lang.String" value="&#x3a8;&#x391;&#x39b;&#x3a4;&#x391;&#x39a;&#x397;&#x3a3; &#x39d;&#x399;&#x39a;&#x39f;&#x39b;&#x391;&#x39f;&#x3a3; - std080926"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel9">

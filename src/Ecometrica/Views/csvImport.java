@@ -19,7 +19,7 @@ public class csvImport {
     private String cvsSplitBy = ";";
     private String[] countries = new String[240];
     private String[] codes = new String[240];
-
+    
     public String[] importCountryNames() {        
         int i = 1;
         countries[0] = "Επιλογή Χώρας";
@@ -27,7 +27,6 @@ public class csvImport {
             //να μην διαβάσει την πρώτη γραμμή που είναι οι ετικετες
             br.readLine();
             while ((line = br.readLine()) != null) {
-
                 // use semicoin as separator
                 String[] country = line.split(cvsSplitBy);
                 countries[i] = country[0];               
@@ -46,7 +45,6 @@ public class csvImport {
             //να μην διαβάσει την πρώτη γραμμή που είναι οι ετικετες
             br.readLine();
             while ((line = br.readLine()) != null) {
-
                 // use semicoin as separator
                 String[] country = line.split(cvsSplitBy);
                 codes[i] = country[2];                
