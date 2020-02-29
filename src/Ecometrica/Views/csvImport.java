@@ -21,8 +21,11 @@ public class csvImport {
     private String[] codes = new String[240];
     
     public String[] importCountryNames() {        
-        int i = 1;
+        //Διάβασμα του αρχείου csv και αποθήκευση των ονομάττων των χωρών
+        //στον Πίνακα countries.
+        //Στην πρώτη θέση του πίνακα βάζουμε τον τίτλο Επιλογή Χώρας 
         countries[0] = "Επιλογή Χώρας";
+        int i = 1;
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
             //να μην διαβάσει την πρώτη γραμμή που είναι οι ετικετες
             br.readLine();
@@ -38,9 +41,11 @@ public class csvImport {
         return countries;
     }
     
-    public String[] importCountryCodes() {        
+    public String[] importCountryCodes() {     
+        //Διάβασμα του αρχείου csv και αποθήκευση των κωδικών των χωρών
+        //στον Πίνακα codes.
+        //Στην πρώτη θέση του πίνακα την αφήνουμε κενή
         int i = 1;
-        codes[0] = "";
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
             //να μην διαβάσει την πρώτη γραμμή που είναι οι ετικετες
             br.readLine();
