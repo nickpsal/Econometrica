@@ -827,7 +827,7 @@ public class InsertDataGUI extends javax.swing.JFrame {
     
     private void draftBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_draftBtnActionPerformed
         //Εμφάνιση γραφήματος
-        String title = "ΔΙΑΓΡΑΜΜΑ ΟΙΚΟΝΟΜΙΚΩΝ ΣΤΟΙΧΕΙΩΝ " + jComboBox1.getSelectedItem();
+        String title = "ΔΙΑΓΡΑΜΜΑ ΟΙΚΟΝΟΜΙΚΩΝ ΣΤΟΙΧΕΙΩΝ GDP ΚΑΙ BP OIL ΓΙΑ ΤΗΝ ΧΩΡΑ " + jComboBox1.getSelectedItem();
         final DualAxis demo = new DualAxis(title, GDPdata, OILdata);
         demo.pack();
         RefineryUtilities.centerFrameOnScreen(demo);
