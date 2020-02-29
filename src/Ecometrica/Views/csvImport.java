@@ -17,9 +17,10 @@ public class csvImport {
     private String csvFile = "iso-countries.csv";       
     private String line = "";
     private String cvsSplitBy = ";";
-    private String[][] countries = new String[239][2];
+    private String[] countries = new String[240];
+    private String[] codes = new String[240];
 
-    public String[][] importer() {        
+    public String[] importCountryNames() {        
         int i = 0;
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
             //να μην διαβάσει την πρώτη γραμμή που είναι οι ετικετες
@@ -28,8 +29,25 @@ public class csvImport {
 
                 // use semicoin as separator
                 String[] country = line.split(cvsSplitBy);
-                countries[i][0] = country[0];
-                countries[i][1] = country[2];                
+                countries[i] = country[0];               
+                i++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return countries;
+    }
+    
+    public String[] importCountryCodes() {        
+        int i = 0;
+        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+            //να μην διαβάσει την πρώτη γραμμή που είναι οι ετικετες
+            br.readLine();
+            while ((line = br.readLine()) != null) {
+
+                // use semicoin as separator
+                String[] country = line.split(cvsSplitBy);
+                countries[i] = country[2];                
                 i++;
             }
         } catch (IOException e) {

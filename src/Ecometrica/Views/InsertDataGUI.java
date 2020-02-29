@@ -64,8 +64,8 @@ public class InsertDataGUI extends javax.swing.JFrame {
         //this.setResizable(false);
         // Εισαγωγή Ονομάτων Χωρών στο ComboBox απο το αρχειο csv
         csvImport insert = new csvImport();
-        countries = insert.importer();
-        
+        country = insert.importCountryNames();
+        code = insert.importCountryCodes();
         //Δημιουργια Πίνακα με όνοματα χώρας και Πίνακα με
         //κωδικο κάθε χώρας
         
@@ -837,7 +837,7 @@ public class InsertDataGUI extends javax.swing.JFrame {
     private void savetoDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savetoDBActionPerformed
         //Αποθήκευση Δεδομένων στην ΒΔ
         DataDB db = new DataDB();
-        boolean succ = db.InsertCountryData(countries, choise);
+        boolean succ = db.InsertCountryData(country,code, choise);
         if (!succ){
             JOptionPane.showMessageDialog(panel, "ΑΔΥΝΑΤΗ Η ΑΠΟΘΗΚΕΥΣΗ ΣΤΗΝ ΒΑΣΗ ΔΕΔΟΜΕΝΩΝ",
 						"ΣΦΑΛΜΑ", JOptionPane.INFORMATION_MESSAGE);
