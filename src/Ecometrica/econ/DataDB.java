@@ -136,7 +136,7 @@ public class DataDB {
     }
     
     public boolean InsertCountryDataOIL(List<CountryData> OILdata){
-        //Εισαγωγή δεδομένων στον Πίνακα Country_Dataset
+        //Εισαγωγή δεδομένων στον Πίνακα Country_Data
         try {
             emf = Persistence.createEntityManagerFactory("EconometricaPU");
             em = emf.createEntityManager();
