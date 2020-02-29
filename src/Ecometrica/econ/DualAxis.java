@@ -39,11 +39,11 @@ public class DualAxis extends JFrame {
         super(title);
         this.GDPdata = GDPdata;
         this.OILdata = OILdata;
-        final String chartTitle = "ΔΙΑΓΡΑΜΜΑ ΟΙΚΟΝΟΜΙΚΩΝ ΣΤΟΙΧΕΙΩΝ GDP ΚΑΙ OIL CONSUMPTION";
+        //final String chartTitle = "";
         final XYDataset dataset = createDataset1();
 
         final JFreeChart chart = ChartFactory.createTimeSeriesChart(
-            chartTitle, 
+            title, 
             "ΗΜΕΡΟΜΗΝΙΕΣ", 
             "GDP (Πρωην LCU)",
             dataset, 
