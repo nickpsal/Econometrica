@@ -49,8 +49,8 @@ public class DataDB {
             em = emf.createEntityManager();
             em.getTransaction().begin();
             // Εισαγωγή Δεδομένων στον Πινακας Country 
-            country1.setName(lista[choise-1]);
-            country1.setIsoCode(kodikoi[choise-1]);
+            country1.setName(lista[choise]);
+            country1.setIsoCode(kodikoi[choise]);
             em.persist(country1);
             em.flush();
             em.getTransaction().commit(); 
