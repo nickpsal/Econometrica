@@ -80,6 +80,7 @@ public class InsertDataGUI extends javax.swing.JFrame {
         savetoDB.setEnabled(false);
         progBar.setVisible(false);
         loadDataLabel.setVisible(false);
+        dbCheckBox.setVisible(false);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -91,7 +92,6 @@ public class InsertDataGUI extends javax.swing.JFrame {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         fetchBtn = new javax.swing.JButton();
         panel = new javax.swing.JPanel();
@@ -117,6 +117,7 @@ public class InsertDataGUI extends javax.swing.JFrame {
         savetoDB = new javax.swing.JButton();
         draftBtn = new javax.swing.JButton();
         deleteAllBtn = new javax.swing.JButton();
+        dbCheckBox = new javax.swing.JCheckBox();
         progBar = new javax.swing.JProgressBar();
         loadDataLabel = new javax.swing.JLabel();
 
@@ -128,10 +129,6 @@ public class InsertDataGUI extends javax.swing.JFrame {
         });
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 0));
-
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("ΕΠΙΛΟΓΗ ΧΩΡΑΣ");
 
         jComboBox1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -568,6 +565,8 @@ public class InsertDataGUI extends javax.swing.JFrame {
                     .addComponent(deleteAllBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
+        dbCheckBox.setSelected(true);
+
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
@@ -575,6 +574,8 @@ public class InsertDataGUI extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(dbCheckBox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dbcheckLabel)
                 .addContainerGap())
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -582,9 +583,11 @@ public class InsertDataGUI extends javax.swing.JFrame {
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLayout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 442, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dbcheckLabel)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dbcheckLabel)
+                    .addComponent(dbCheckBox))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
@@ -592,7 +595,7 @@ public class InsertDataGUI extends javax.swing.JFrame {
 
         loadDataLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         loadDataLabel.setForeground(new java.awt.Color(255, 255, 255));
-        loadDataLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        loadDataLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         loadDataLabel.setText("jLabel8");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -607,10 +610,8 @@ public class InsertDataGUI extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(fetchBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(47, 47, 47)
-                        .addComponent(loadDataLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(loadDataLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
                         .addComponent(progBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
             .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -620,17 +621,14 @@ public class InsertDataGUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(loadDataLabel))
+                    .addComponent(loadDataLabel)
                     .addComponent(progBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(fetchBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                     .addComponent(jComboBox1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -693,15 +691,16 @@ public class InsertDataGUI extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(panel, "ΗΔΗ ΑΠΟΘΗΚΕΥΜΕΝΗ ΣΤΗΝ ΒΑΣΗ ΔΕΔΟΜΕΝΩΝ ΘΑ ΧΡΗΣΙΜΟΠΟΙΗΣΟΥΜΕ ΤΑ ΔΕΔΟΜΕΝΑ ΤΗΣ ΒΑΣΗΣ ΔΕΔΟΜΕΝΩΝ",
                         "ΠΡΟΣΟΧΗ", JOptionPane.INFORMATION_MESSAGE);        
                 dbcheckLabel.setVisible(true);
+                dbCheckBox.setVisible(true);
                 draftBtn.setEnabled(true);
                 savetoDB.setEnabled(false);
                 //Παίρνουμε της Ημερομηνίες απο την Βάση Δεδομένων
                 ArrayList<String> datesGDP = db.getDatesGDP(countryCode, String.valueOf(jComboBox1.getSelectedItem()));
                 ArrayList<String> datesOIL = db.getDateOIL(countryCode, String.valueOf(jComboBox1.getSelectedItem()));
-                ShowDatesGDP(datesGDP);
-                ShowDatesOIL(datesOIL);
                 GDPdata = db.getDataGDP(countryCode, String.valueOf(jComboBox1.getSelectedItem()));
                 OILdata = db.getDataOIL(countryCode, String.valueOf(jComboBox1.getSelectedItem()));
+                ShowDatesGDP(datesGDP);
+                ShowDatesOIL(datesOIL);
                 fillTableGDP();
                 fillTableOIL();
             }
@@ -882,6 +881,7 @@ public class InsertDataGUI extends javax.swing.JFrame {
      * @param args the command line arguments
      */    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox dbCheckBox;
     private javax.swing.JLabel dbcheckLabel;
     private javax.swing.JButton deleteAllBtn;
     private javax.swing.JButton draftBtn;
@@ -891,7 +891,6 @@ public class InsertDataGUI extends javax.swing.JFrame {
     private javax.swing.JLabel gdpCountry;
     private javax.swing.JTable gdpTable;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
