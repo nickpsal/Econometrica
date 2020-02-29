@@ -74,13 +74,13 @@ public class InsertDataGUI extends javax.swing.JFrame {
         //Απενεργοποίηση Ετικέτα προειδοποίησης οτι τα δεδομένα της χώρας
         //εινια αποθηκευμένα στην  βάση δεδομένων
         dbcheckLabel.setVisible(false);
+        dbCheckBox.setVisible(false);
         //Απενεργοποίηση κουμπιού δημιουργίας διαγράματος
         draftBtn.setEnabled(false);
         //Απενεργοποίηση κουμπιού αποθήκευσης
         savetoDB.setEnabled(false);
         progBar.setVisible(false);
         loadDataLabel.setVisible(false);
-        dbCheckBox.setVisible(false);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -646,6 +646,7 @@ public class InsertDataGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        //Κλείσιμο Παραθύρου και άνοιγμα νεου παραθύρου
         this.dispose();
         new MainFrame().setVisible(true);
     }//GEN-LAST:event_formWindowClosing
@@ -654,6 +655,8 @@ public class InsertDataGUI extends javax.swing.JFrame {
         //Αρχικοποίηση Πίνακα εμφάνισης δεδομένων ή καθαρισμός του Πίνακα
         //σε πρίπτωση που είχαμε ξανακάνει πριν αναζήτηση
         EmptyTable();
+        // choise είναι το index του combobox.
+        // Αν είναι 0 είναι η πρώτη επιλογή του Combobox που είναι ανενεργή 
         if (choise !=0) {
             DataDB db = new DataDB();
             boolean conn = db.TestConnection();
@@ -674,7 +677,6 @@ public class InsertDataGUI extends javax.swing.JFrame {
             // Επιστρέφει false αν δεν υπάρχουν
             boolean succ = db.checkCountryData(countryCode);
             if (succ) {
-                timer.start();   
                 // GDP δεδομένα
                 savetoDB.setEnabled(true);
                 //Καλούμε το api για να παρουμε τα δεδομένα απο την σελίδα
@@ -699,8 +701,11 @@ public class InsertDataGUI extends javax.swing.JFrame {
                 ArrayList<String> datesOIL = db.getDateOIL(countryCode, String.valueOf(jComboBox1.getSelectedItem()));
                 GDPdata = db.getDataGDP(countryCode, String.valueOf(jComboBox1.getSelectedItem()));
                 OILdata = db.getDataOIL(countryCode, String.valueOf(jComboBox1.getSelectedItem()));
+                //Εμφάνιση των δεδομένων στο γραφικό Περιβάλλον
+                //Εκτύπωση Ημερομηνίας Πρώτης και Τελευταίας Μέτρησης Χώρας
                 ShowDatesGDP(datesGDP);
                 ShowDatesOIL(datesOIL);
+                //Γεμίζουμε τον Πίνακα με τα δεδομένα GDP και OIL
                 fillTableGDP();
                 fillTableOIL();
             }
@@ -726,6 +731,9 @@ public class InsertDataGUI extends javax.swing.JFrame {
     
     private void ShowDataGDP(String responseGDP) {
         if (responseGDP != null) {
+            //Αν η μεταβλητή respnseGDP δεν είναι αδεία 
+            //δλδ υπάρχουν δεδομένα καλούμε τις κλάσεις 
+            //της JSONdata για να πάρουμε τα δεδομένα
             JSONdata jdata = new JSONdata();
             StartDateGDP = jdata.dataGDPGetStartDate(responseGDP);
             EndDateGDP = jdata.dataGDPGetNewestDate(responseGDP);
@@ -733,7 +741,6 @@ public class InsertDataGUI extends javax.swing.JFrame {
             endDateGdp.setText("ΤΕΛΕΥΤΑΙΑ ΗΜΕΡΟΜΗΝΙΑ " + " " + sdf.format(EndDateGDP));
             NameGDP = "GDP (Current LCU) for " + jComboBox1.getSelectedItem();
             GDPdata = jdata.getGDPdata(responseGDP);
-            EmptyTable();
             fillTableGDP();
             GDPData = true;
             dbcheckLabel.setVisible(false);
@@ -751,6 +758,9 @@ public class InsertDataGUI extends javax.swing.JFrame {
     
     private void ShowDataOIL(String responseBP) {
         if (responseBP != null) {
+            //Αν η μεταβλητή respnseBP δεν είναι αδεία 
+            //δλδ υπάρχουν δεδομένα καλούμε τις κλάσεις 
+            //της JSONdata για να πάρουμε τα δεδομένα
             JSONdata jdata = new JSONdata();
             StartDateOIL = jdata.dataOILGetStartDate(responseBP);
             EndDateOIL = jdata.dataOILGetNewestDate(responseBP);
@@ -770,6 +780,7 @@ public class InsertDataGUI extends javax.swing.JFrame {
     }
     
     private void EmptyTable() {
+        //Καθαρισμος των 2 πινακων
         for (int i = 0; i < 80; i++) {
             gdpTable.setValueAt(null, i, 0);
             gdpTable.setValueAt(null, i, 1);
@@ -780,6 +791,7 @@ public class InsertDataGUI extends javax.swing.JFrame {
     
     private void ShowDatesGDP(ArrayList<String> datesGDP) {
         if (!datesGDP.isEmpty()) {
+            //Αν η λίστα με τις ημερομηνίες δεν είναι αδεια εμφανίζει τα δεδομένα
             String startDateGDP = "ΗΜΕΡΟΜΗΝΙΑ ΕΚΚΙΝΗΣΗΣ " + " " + datesGDP.get(0) + "-12-31";
             String endDateGDP = "ΤΕΛΕΥΤΑΙΑ ΗΜΕΡΟΜΗΝΙΑ " + " " + datesGDP.get(1) + "-12-31";
             startDateGdp.setText(startDateGDP);
@@ -789,6 +801,7 @@ public class InsertDataGUI extends javax.swing.JFrame {
     
     private void ShowDatesOIL(ArrayList<String> datesOIL) {
         if (!datesOIL.isEmpty()) {
+            //Αν η λίστα με τις ημερομηνίες δεν είναι αδεια εμφανίζει τα δεδομένα
             String startDateOIL = "ΗΜΕΡΟΜΗΝΙΑ ΕΚΚΙΝΗΣΗΣ " + " " + datesOIL.get(0) + "-12-31";
             String endDateOIL = "ΤΕΛΕΥΤΑΙΑ ΗΜΕΡΟΜΗΝΙΑ " + " " + datesOIL.get(1) + "-12-31";
             startDateOil.setText(startDateOIL);
@@ -798,6 +811,7 @@ public class InsertDataGUI extends javax.swing.JFrame {
     
     private void fillTableGDP() {
         for (int i = 0; i < GDPdata.size(); i++) {
+            //Εμφάνιση δεδομένων στον Πίνακα GDP 
             gdpTable.setValueAt(GDPdata.get(i).getDataYear(), i, 0);
             gdpTable.setValueAt(GDPdata.get(i).getValue(), i, 1);
         }
@@ -805,12 +819,14 @@ public class InsertDataGUI extends javax.swing.JFrame {
     
     private void fillTableOIL() {
         for (int i = 0; i < OILdata.size(); i++) {
+             //Εμφάνιση δεδομένων στον Πίνακα OIL
             oilTable.setValueAt(OILdata.get(i).getDataYear(), i, 0);
             oilTable.setValueAt(OILdata.get(i).getValue(), i, 1);
         }
     }
     
     private void draftBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_draftBtnActionPerformed
+        //Εμφάνιση γραφήματος
         final DualAxis demo = new DualAxis("ΔΙΑΓΡΑΜΜΑ ΟΙΚΟΝΟΜΙΚΩΝ ΣΤΟΙΧΕΙΩΝ", GDPdata, OILdata);
         demo.pack();
         RefineryUtilities.centerFrameOnScreen(demo);
@@ -818,6 +834,8 @@ public class InsertDataGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_draftBtnActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        //Οταν επιλέγουμε μια χώρα απο το Combobox αποθηκέυουμε τον Κωδικό χώρας
+        //στην countryCode και εμφάνισης του ονόματος χώρας στο Γραφικό Περιβάλλον
         choise = jComboBox1.getSelectedIndex();
         if (choise !=0) {
             countryCode = codes[choise];
@@ -830,6 +848,7 @@ public class InsertDataGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void deleteAllBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAllBtnActionPerformed
+        //Επιβαιβαίωση διαγραφής δεδομένων
         int result = JOptionPane.showConfirmDialog(null,
                 "ΕΙΣΤΕ ΣΙΓΟΥΡΟΙ ΘΕΛΕΤΕ ΝΑ ΔΙΑΓΡΑΨΕΤΕ ΟΛΑ ΤΑ ΔΕΔΟΜΕΝΑ ΑΠΟ ΤΗΝ ΒΑΣΗ ΔΕΔΟΜΕΝΩΝ???", null, JOptionPane.YES_NO_OPTION);
         if (result == JOptionPane.YES_OPTION) {
@@ -846,20 +865,24 @@ public class InsertDataGUI extends javax.swing.JFrame {
         //Αποθήκευση Δεδομένων στην ΒΔ
         DataDB db = new DataDB();
         boolean succ = db.InsertCountryData(countries,codes, choise);
+        //Εισαγωγή Δεδομένων στον Πίνακα Country
         if (!succ){
             JOptionPane.showMessageDialog(panel, "ΑΔΥΝΑΤΗ Η ΑΠΟΘΗΚΕΥΣΗ ΣΤΗΝ ΒΑΣΗ ΔΕΔΟΜΕΝΩΝ",
 						"ΣΦΑΛΜΑ", JOptionPane.INFORMATION_MESSAGE);
         }
+        //Εισαγωγή Δεδομένων στον Πίνακα Country_Dataset για τα δεδομένα GDP
         succ = db.InsertDatasetGDP(StartDateGDP, EndDateGDP, NameGDP);
         if (!succ){
             JOptionPane.showMessageDialog(panel, "Αδύνατη η αποθήκευση δεδομένων στον Πίνακα COUNTRY_DATASET για GDP (Πρωην LCU) στην Βάση Δεδομένων",
 						"ΣΦΑΛΜΑ", JOptionPane.INFORMATION_MESSAGE);
         }
+        //Εισαγωγή Δεδομένων στον Πίνακα Country_Dataset για τα δεδομένα OIL
         succ = db.InsertDatasetOIL(StartDateOIL, EndDateOIL, NameOIL,Desc);
         if (!succ){
             JOptionPane.showMessageDialog(panel, "Αδύνατη η αποθήκευση δεδομένων στον Πίνακα COUNTRY_DATASET για OIL Concumption στην Βάση Δεδομένων",
 						"ΣΦΑΛΜΑ", JOptionPane.INFORMATION_MESSAGE);
         }
+        //Εισαγωγή Δεδομένων στον Πίνακα Country_Data για τα δεδομένα GDP
         if (GDPData) {
             boolean savedGDP = db.InsertCountryDataGDP(GDPdata);
             if (!savedGDP){
@@ -867,6 +890,7 @@ public class InsertDataGUI extends javax.swing.JFrame {
 						"ΣΦΑΛΜΑ", JOptionPane.INFORMATION_MESSAGE);
             }
         }
+        //Εισαγωγή Δεδομένων στον Πίνακα Country_Data για τα δεδομένα OIL
         if (OILData) {
             boolean savedOIL = db.InsertCountryDataOIL(OILdata);
             if (!savedOIL){
