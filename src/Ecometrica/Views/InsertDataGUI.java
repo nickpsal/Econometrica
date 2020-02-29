@@ -682,54 +682,12 @@ public class InsertDataGUI extends javax.swing.JFrame {
                 //Καλούμε το api για να παρουμε τα δεδομένα απο την σελίδα
                 restApi api = new restApi(countryCode, key);
                 String url1 = "https://www.quandl.com/api/v3/datasets/WWDI/";
-                String responseGDP = api.getDataGDP(url1);
-                //Εκτύπωση δεδομένων σε περίπτωση που υπάρχουν δεδομένα
-                if (responseGDP != null) {
-                    JSONdata jdata = new JSONdata();
-                    StartDateGDP = jdata.dataGDPGetStartDate(responseGDP);
-                    EndDateGDP = jdata.dataGDPGetNewestDate(responseGDP);
-                    startDateGdp.setText("ΗΜΕΡΟΜΗΝΙΑ ΕΚΚΙΝΗΣΗΣ " + " " + sdf.format(StartDateGDP));
-                    endDateGdp.setText("ΤΕΛΕΥΤΑΙΑ ΗΜΕΡΟΜΗΝΙΑ " + " " + sdf.format(EndDateGDP));
-                    NameGDP = "GDP (Current LCU) for " + jComboBox1.getSelectedItem();
-                    GDPdata = jdata.getGDPdata(responseGDP);
-                    EmptyTable();
-                    fillTableGDP();
-                    GDPData = true;
-                    dbcheckLabel.setVisible(false);
-                    draftBtn.setEnabled(true);
-                    savetoDB.setEnabled(true);
-                } else {
-                    JOptionPane.showMessageDialog(panel, "ΔΕΝ ΒΡΕΘΗΚΑΝ ΔΕΔΟΜΈΝΑ GDP ΓΙΑ ΤΗΝ ΣΥΓΚΕΚΡΙΜΕΝΗ ΧΩΡΑ",
-                            "ΣΦΑΛΜΑ", JOptionPane.INFORMATION_MESSAGE);
-                    draftBtn.setEnabled(false);
-                    dbcheckLabel.setEnabled(false);
-                    savetoDB.setEnabled(false);
-                    GDPData = false;
-                }
-
-                // oil δεδομένα
                 String url2 = "https://www.quandl.com/api/v3/datasets/BP/OIL_CONSUM_";
-                //Καλούμε το api για να παρουμε τα δεδομένα απο την σελίδα
+                String responseGDP = api.getDataGDP(url1);
                 String responseBP = api.getDataBP(url2);
-                // Ελεγχος αν υπάρχουν τα δεδομένα της χώρας ήδη στην ΒΔ
-                // Επιστρέφει false αν δεν υπάρχουν
-                if (responseBP != null) {
-                    JSONdata jdata = new JSONdata();
-                    StartDateOIL = jdata.dataOILGetStartDate(responseBP);
-                    EndDateOIL = jdata.dataOILGetNewestDate(responseBP);
-                    startDateOil.setText("ΗΜΕΡΟΜΗΝΙΑ ΕΚΚΙΝΗΣΗΣ " + " " + sdf.format(StartDateOIL));
-                    endDateOil.setText("ΤΕΛΕΥΤΑΙΑ ΗΜΕΡΟΜΗΝΙΑ " + " " + sdf.format(EndDateOIL));
-                    NameOIL = "Oil Consumption - " + jComboBox1.getSelectedItem();
-                    Desc = "Oil Consumption - " + jComboBox1.getSelectedItem() + ". Million tonnes.";
-                    //Εκτύπωση δεδομένων σε περίπτωση που υπάρχουν δεδομένα
-                    OILdata = jdata.getOILdata(responseBP);
-                    fillTableOIL();
-                    OILData = true;
-                } else {
-                    JOptionPane.showMessageDialog(panel, "ΔΕΝ ΒΡΕΘΗΚΑΝ ΔΕΔΟΜΈΝΑ OIL ΓΙΑ ΤΗΝ ΣΥΓΚΕΚΡΙΜΕΝΗ ΧΩΡΑ",
-                            "ΣΦΑΛΜΑ", JOptionPane.INFORMATION_MESSAGE);
-                    OILData = false;
-                }
+                //Εκτύπωση δεδομένων σε περίπτωση που υπάρχουν δεδομένα
+                ShowDataGDP(responseGDP);
+                ShowDataOIL(responseBP);
             } else {
                 //Τα δεδομένα της χώρας ελιναι ηδη αποθηκευμλενα στην ΒΔ
                 JOptionPane.showMessageDialog(panel, "ΗΔΗ ΑΠΟΘΗΚΕΥΜΕΝΗ ΣΤΗΝ ΒΑΣΗ ΔΕΔΟΜΕΝΩΝ ΘΑ ΧΡΗΣΙΜΟΠΟΙΗΣΟΥΜΕ ΤΑ ΔΕΔΟΜΕΝΑ ΤΗΣ ΒΑΣΗΣ ΔΕΔΟΜΕΝΩΝ",
@@ -740,21 +698,10 @@ public class InsertDataGUI extends javax.swing.JFrame {
                 //Παίρνουμε της Ημερομηνίες απο την Βάση Δεδομένων
                 ArrayList<String> datesGDP = db.getDatesGDP(countryCode, String.valueOf(jComboBox1.getSelectedItem()));
                 ArrayList<String> datesOIL = db.getDateOIL(countryCode, String.valueOf(jComboBox1.getSelectedItem()));
-                if (!datesGDP.isEmpty()) {
-                    String startDateGDP = "ΗΜΕΡΟΜΗΝΙΑ ΕΚΚΙΝΗΣΗΣ " + " " + datesGDP.get(0) + "-12-31";
-                    String endDateGDP = "ΤΕΛΕΥΤΑΙΑ ΗΜΕΡΟΜΗΝΙΑ " + " " + datesGDP.get(1) + "-12-31";
-                    startDateGdp.setText(startDateGDP);
-                    endDateGdp.setText(endDateGDP);
-                }
-                if (!datesOIL.isEmpty()) {
-                    String startDateOIL = "ΗΜΕΡΟΜΗΝΙΑ ΕΚΚΙΝΗΣΗΣ " + " " + datesOIL.get(0) + "-12-31";
-                    String endDateOIL = "ΤΕΛΕΥΤΑΙΑ ΗΜΕΡΟΜΗΝΙΑ " + " " + datesOIL.get(1) + "-12-31";
-                    startDateOil.setText(startDateOIL);
-                    endDateOil.setText(endDateOIL);
-                }
+                ShowDatesGDP(datesGDP);
+                ShowDatesOIL(datesOIL);
                 GDPdata = db.getDataGDP(countryCode, String.valueOf(jComboBox1.getSelectedItem()));
                 OILdata = db.getDataOIL(countryCode, String.valueOf(jComboBox1.getSelectedItem()));
-                EmptyTable();
                 fillTableGDP();
                 fillTableOIL();
             }
@@ -778,12 +725,75 @@ public class InsertDataGUI extends javax.swing.JFrame {
         }
     }
     
+    private void ShowDataGDP(String responseGDP) {
+        if (responseGDP != null) {
+            JSONdata jdata = new JSONdata();
+            StartDateGDP = jdata.dataGDPGetStartDate(responseGDP);
+            EndDateGDP = jdata.dataGDPGetNewestDate(responseGDP);
+            startDateGdp.setText("ΗΜΕΡΟΜΗΝΙΑ ΕΚΚΙΝΗΣΗΣ " + " " + sdf.format(StartDateGDP));
+            endDateGdp.setText("ΤΕΛΕΥΤΑΙΑ ΗΜΕΡΟΜΗΝΙΑ " + " " + sdf.format(EndDateGDP));
+            NameGDP = "GDP (Current LCU) for " + jComboBox1.getSelectedItem();
+            GDPdata = jdata.getGDPdata(responseGDP);
+            EmptyTable();
+            fillTableGDP();
+            GDPData = true;
+            dbcheckLabel.setVisible(false);
+            draftBtn.setEnabled(true);
+            savetoDB.setEnabled(true);
+        } else {
+            JOptionPane.showMessageDialog(panel, "ΔΕΝ ΒΡΕΘΗΚΑΝ ΔΕΔΟΜΈΝΑ GDP ΓΙΑ ΤΗΝ ΣΥΓΚΕΚΡΙΜΕΝΗ ΧΩΡΑ",
+                    "ΣΦΑΛΜΑ", JOptionPane.INFORMATION_MESSAGE);
+            draftBtn.setEnabled(false);
+            dbcheckLabel.setEnabled(false);
+            savetoDB.setEnabled(false);
+            GDPData = false;
+        }
+    }
+    
+    private void ShowDataOIL(String responseBP) {
+        if (responseBP != null) {
+            JSONdata jdata = new JSONdata();
+            StartDateOIL = jdata.dataOILGetStartDate(responseBP);
+            EndDateOIL = jdata.dataOILGetNewestDate(responseBP);
+            startDateOil.setText("ΗΜΕΡΟΜΗΝΙΑ ΕΚΚΙΝΗΣΗΣ " + " " + sdf.format(StartDateOIL));
+            endDateOil.setText("ΤΕΛΕΥΤΑΙΑ ΗΜΕΡΟΜΗΝΙΑ " + " " + sdf.format(EndDateOIL));
+            NameOIL = "Oil Consumption - " + jComboBox1.getSelectedItem();
+            Desc = "Oil Consumption - " + jComboBox1.getSelectedItem() + ". Million tonnes.";
+            //Εκτύπωση δεδομένων σε περίπτωση που υπάρχουν δεδομένα
+            OILdata = jdata.getOILdata(responseBP);
+            fillTableOIL();
+            OILData = true;
+        } else {
+            JOptionPane.showMessageDialog(panel, "ΔΕΝ ΒΡΕΘΗΚΑΝ ΔΕΔΟΜΈΝΑ OIL ΓΙΑ ΤΗΝ ΣΥΓΚΕΚΡΙΜΕΝΗ ΧΩΡΑ",
+                    "ΣΦΑΛΜΑ", JOptionPane.INFORMATION_MESSAGE);
+            OILData = false;
+        }
+    }
+    
     private void EmptyTable() {
         for (int i = 0; i < 80; i++) {
             gdpTable.setValueAt(null, i, 0);
             gdpTable.setValueAt(null, i, 1);
             oilTable.setValueAt(null, i, 0);
             oilTable.setValueAt(null, i, 1);
+        }
+    }
+    
+    private void ShowDatesGDP(ArrayList<String> datesGDP) {
+        if (!datesGDP.isEmpty()) {
+            String startDateGDP = "ΗΜΕΡΟΜΗΝΙΑ ΕΚΚΙΝΗΣΗΣ " + " " + datesGDP.get(0) + "-12-31";
+            String endDateGDP = "ΤΕΛΕΥΤΑΙΑ ΗΜΕΡΟΜΗΝΙΑ " + " " + datesGDP.get(1) + "-12-31";
+            startDateGdp.setText(startDateGDP);
+            endDateGdp.setText(endDateGDP);
+        }
+    }
+    
+    private void ShowDatesOIL(ArrayList<String> datesOIL) {
+        if (!datesOIL.isEmpty()) {
+            String startDateOIL = "ΗΜΕΡΟΜΗΝΙΑ ΕΚΚΙΝΗΣΗΣ " + " " + datesOIL.get(0) + "-12-31";
+            String endDateOIL = "ΤΕΛΕΥΤΑΙΑ ΗΜΕΡΟΜΗΝΙΑ " + " " + datesOIL.get(1) + "-12-31";
+            startDateOil.setText(startDateOIL);
+            endDateOil.setText(endDateOIL);
         }
     }
     
