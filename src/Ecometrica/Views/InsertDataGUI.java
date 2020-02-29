@@ -8,6 +8,7 @@ package Ecometrica.Views;
 import javax.swing.DefaultComboBoxModel;
 import Ecometrica.econ.*;
 import Pojos.CountryData;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -39,6 +40,7 @@ public class InsertDataGUI extends javax.swing.JFrame {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     //api key
     private final String key = "xt8bLEyhssQMhYbri3_C";
+    private String[][] countries;
     private Date StartDateGDP;
     private Date EndDateGDP;
     private String NameGDP;
@@ -57,12 +59,16 @@ public class InsertDataGUI extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("ΕΜΦΑΝΙΣΗ ΟΙΚΟΝΟΜΙΚΩΝ ΣΤΟΙΧΕΩΝ");
-        this.setResizable(false);
+        this.setSize(920, 670);
+        this.setMinimumSize(new Dimension(920,670));
+        //this.setResizable(false);
         // Εισαγωγή Ονομάτων Χωρών στο ComboBox απο το αρχειο csv
         csvImport insert = new csvImport();
-        //Δημιουργία πίνακα με τις χώρες και τον κωδικο της κάθε χώρας
-        country = insert.importerCountries();
-        code = insert.importerCountriesCodes();
+        countries = insert.importer();
+        
+        //Δημιουργια Πίνακα με όνοματα χώρας και Πίνακα με
+        //κωδικο κάθε χώρας
+        
         jComboBox1.setModel(new DefaultComboBoxModel<>(country));    
         //Αρχικοποίηση ετικετών για τα Όνοματα των Χωρών που επιλέγουμε
         oilCountry.setText("");
@@ -108,11 +114,11 @@ public class InsertDataGUI extends javax.swing.JFrame {
         gdpTable = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         oilTable = new javax.swing.JTable();
+        dbcheckLabel = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         savetoDB = new javax.swing.JButton();
         draftBtn = new javax.swing.JButton();
         deleteAllBtn = new javax.swing.JButton();
-        dbcheckLabel = new javax.swing.JLabel();
         progBar = new javax.swing.JProgressBar();
         loadDataLabel = new javax.swing.JLabel();
 
@@ -511,6 +517,10 @@ public class InsertDataGUI extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(12, 6, 0, 0);
         jPanel2.add(jScrollPane2, gridBagConstraints);
 
+        dbcheckLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        dbcheckLabel.setForeground(new java.awt.Color(255, 255, 255));
+        dbcheckLabel.setText("ΗΔΗ ΑΠΟΘΗΚΕΥΜΕΝΟ ΣΤΗΝ ΒΑΣΗ ΔΕΔΟΜΕΝΩΝ");
+
         jPanel3.setBackground(new java.awt.Color(102, 102, 0));
 
         savetoDB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ecometrica/Views/images/Save-icon.png"))); // NOI18N
@@ -537,35 +547,24 @@ public class InsertDataGUI extends javax.swing.JFrame {
             }
         });
 
-        dbcheckLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        dbcheckLabel.setForeground(new java.awt.Color(255, 255, 255));
-        dbcheckLabel.setText("ΗΔΗ ΑΠΟΘΗΚΕΥΜΕΝΟ ΣΤΗΝ ΒΑΣΗ ΔΕΔΟΜΕΝΩΝ");
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(savetoDB)
-                        .addGap(18, 18, 18)
-                        .addComponent(draftBtn)
-                        .addGap(18, 18, 18)
-                        .addComponent(deleteAllBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(dbcheckLabel)))
+                .addComponent(savetoDB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(draftBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(deleteAllBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(dbcheckLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(savetoDB, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(draftBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(deleteAllBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -575,14 +574,20 @@ public class InsertDataGUI extends javax.swing.JFrame {
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 936, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(dbcheckLabel)
+                .addContainerGap())
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLayout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 442, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dbcheckLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
         );
@@ -626,8 +631,8 @@ public class InsertDataGUI extends javax.swing.JFrame {
                     .addComponent(fetchBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                     .addComponent(jComboBox1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -832,7 +837,7 @@ public class InsertDataGUI extends javax.swing.JFrame {
     private void savetoDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savetoDBActionPerformed
         //Αποθήκευση Δεδομένων στην ΒΔ
         DataDB db = new DataDB();
-        boolean succ = db.InsertCountryData(country,code ,choise);
+        boolean succ = db.InsertCountryData(countries, choise);
         if (!succ){
             JOptionPane.showMessageDialog(panel, "ΑΔΥΝΑΤΗ Η ΑΠΟΘΗΚΕΥΣΗ ΣΤΗΝ ΒΑΣΗ ΔΕΔΟΜΕΝΩΝ",
 						"ΣΦΑΛΜΑ", JOptionPane.INFORMATION_MESSAGE);
