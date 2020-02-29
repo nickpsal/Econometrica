@@ -35,6 +35,7 @@ public class restApi {
         }
         return null;
     }
+    
     //Παίρνουμε τα δεδομένα JSON απο την σελίδα
     public String getDataBP(String urlBP) {
         String url2 = ".json?api_key=";
@@ -51,6 +52,7 @@ public class restApi {
         }
         return null;
     }
+    
     // ΈΛεγχος αν είναι σωστά τα λινκ
     public String getData(String urlGDP) {
         OkHttpClient client = new OkHttpClient();
