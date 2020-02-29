@@ -28,8 +28,8 @@ public class InsertDataGUI extends javax.swing.JFrame {
      * Creates new form InsertDataGUI
      */
     //Πίνακες που θα αποθηκευτόυν τα Ονόματα και οι κωδικοι των χωρών
-    private String[] country = new String[240];
-    private String[] code = new String[240];
+    private String[] countries = new String[240];
+    private String[] codes = new String[240];
     
     //λίστες για να αποθηκεύονται τα δεδομένα GDP OIL
     List<CountryData> GDPdata = new ArrayList();
@@ -40,7 +40,6 @@ public class InsertDataGUI extends javax.swing.JFrame {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     //api key
     private final String key = "xt8bLEyhssQMhYbri3_C";
-    private String[][] countries;
     private Date StartDateGDP;
     private Date EndDateGDP;
     private String NameGDP;
@@ -64,12 +63,11 @@ public class InsertDataGUI extends javax.swing.JFrame {
         //this.setResizable(false);
         // Εισαγωγή Ονομάτων Χωρών στο ComboBox απο το αρχειο csv
         csvImport insert = new csvImport();
-        country = insert.importCountryNames();
-        code = insert.importCountryCodes();
+        countries = insert.importCountryNames();
+        codes = insert.importCountryCodes();
         //Δημιουργια Πίνακα με όνοματα χώρας και Πίνακα με
         //κωδικο κάθε χώρας
-        
-        jComboBox1.setModel(new DefaultComboBoxModel<>(country));    
+        jComboBox1.setModel(new DefaultComboBoxModel<>(countries));    
         //Αρχικοποίηση ετικετών για τα Όνοματα των Χωρών που επιλέγουμε
         oilCountry.setText("");
         gdpCountry.setText("");
@@ -813,7 +811,8 @@ public class InsertDataGUI extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         choise = jComboBox1.getSelectedIndex();
         if (choise !=0) {
-            countryCode = code[choise];
+            countryCode = codes[choise];
+            System.out.println(codes[choise]);
             String CountryGDP = "GDP (Current LCU) - " + String.valueOf(jComboBox1.getSelectedItem());
             String CountryOIL = "OIL Consumption - " + String.valueOf(jComboBox1.getSelectedItem());
             oilCountry.setText(CountryOIL);
@@ -837,7 +836,7 @@ public class InsertDataGUI extends javax.swing.JFrame {
     private void savetoDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savetoDBActionPerformed
         //Αποθήκευση Δεδομένων στην ΒΔ
         DataDB db = new DataDB();
-        boolean succ = db.InsertCountryData(country,code, choise);
+        boolean succ = db.InsertCountryData(countries,codes, choise);
         if (!succ){
             JOptionPane.showMessageDialog(panel, "ΑΔΥΝΑΤΗ Η ΑΠΟΘΗΚΕΥΣΗ ΣΤΗΝ ΒΑΣΗ ΔΕΔΟΜΕΝΩΝ",
 						"ΣΦΑΛΜΑ", JOptionPane.INFORMATION_MESSAGE);
