@@ -260,8 +260,7 @@ public class DataDB {
         dataOIL.addAll(q.getResultList());
         em.close();
         return dataOIL;
-    }
-    
+    }    
 
     public boolean emptyDB() {
         //Άδειασμα Πινάκων Βάσης Δεδομένων
