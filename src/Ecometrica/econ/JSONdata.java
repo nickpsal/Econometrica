@@ -17,8 +17,7 @@ import java.util.List;
  *
  * @author nickpsal
  */
-public class JSONdata {
-    
+public class JSONdata {   
     //Πάιρνουμε όλα τα Ολα τα δεδομένα και τα στέλνουμε στις υπόλοιπες κλάσεις
     public GDPandOIL getallData(String response) {
         GsonBuilder builder = new GsonBuilder();
@@ -37,12 +36,14 @@ public class JSONdata {
         Date Startdate = gp.getOldest_available_date();
         return Startdate;                
     }
+    
     //Παίρνουμε την τελευταία ημερομηνία μετρήσεων απο τα δεδομένα JSON
     public Date dataGDPGetNewestDate(String responseGDP) {
         GDPandOIL gp = getallData(responseGDP);
         Date NewestDate = gp.getNewest_available_date();
         return NewestDate;                
     }
+    
     //Παίρνουμε τα δεδομένα των μετρήσεων GDP απο τα δεδομένα JSON
     public List<CountryData> getGDPdata(String responseGDP) {
         List<CountryData> GDPdata = new ArrayList<>();
@@ -56,18 +57,21 @@ public class JSONdata {
         }
         return GDPdata;
     }
+    
     //Παίρνουμε την ημερομηνία Έναρξης μετρήσεων απο τα δεδομένα JSON
     public Date dataOILGetStartDate(String responseBP) {
         GDPandOIL gp = getallData(responseBP);
         Date Startdate = gp.getOldest_available_date();
         return Startdate;                
     }
+    
     //Παίρνουμε την τελευταία ημερομηνία μετρήσεων απο τα δεδομένα JSON
     public Date dataOILGetNewestDate(String responseBP) {
         GDPandOIL gp = getallData(responseBP);
         Date NewestDate = gp.getNewest_available_date();
         return NewestDate;                
     }
+    
     //Παίρνουμε τα δεδομένα των μετρήσεων BP OIL απο τα δεδομένα JSON
     public List<CountryData> getOILdata(String responseBP) {
         List<CountryData> OILdata = new ArrayList<>();
