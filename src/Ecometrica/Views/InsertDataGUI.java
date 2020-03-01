@@ -640,8 +640,10 @@ public class InsertDataGUI extends javax.swing.JFrame {
     }
     
     private void fillTableGDP() {
+        //Δημιουργία model για τον Πίνακα
         DefaultTableModel tm1 = (DefaultTableModel) gdpTable.getModel();
         for (int i = 0; i < GDPdata.size(); i++) {
+            //Παιρνάμε τιμές στον Πίνακα
             Object[] row1 = {
                 GDPdata.get(i).getDataYear(),
                 GDPdata.get(i).getValue()
@@ -651,8 +653,10 @@ public class InsertDataGUI extends javax.swing.JFrame {
     }
     
     private void fillTableOIL() {
+        //Δημιουργία model για τον Πίνακα
         DefaultTableModel tm2 = (DefaultTableModel) oilTable.getModel();
         for (int i = 0; i < OILdata.size(); i++) {
+            //Παιρνάμε τιμές στον Πίνακα
             Object[] row2 = {
                 OILdata.get(i).getDataYear(),
                 OILdata.get(i).getValue()
