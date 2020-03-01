@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import javax.swing.table.DefaultTableModel;
 import org.jfree.ui.RefineryUtilities;
 
 /**
@@ -283,86 +284,7 @@ public class InsertDataGUI extends javax.swing.JFrame {
 
         gdpTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "ΕΤΟΣ", "ΤΙΜΗ"
@@ -397,87 +319,7 @@ public class InsertDataGUI extends javax.swing.JFrame {
 
         oilTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "ΕΤΟΣ", "ΤΙΜΗ"
@@ -781,11 +623,41 @@ public class InsertDataGUI extends javax.swing.JFrame {
     
     private void EmptyTable() {
         //Καθαρισμος των 2 πινακων
-        for (int i = 0; i < 80; i++) {
-            gdpTable.setValueAt(null, i, 0);
-            gdpTable.setValueAt(null, i, 1);
-            oilTable.setValueAt(null, i, 0);
-            oilTable.setValueAt(null, i, 1);
+        DefaultTableModel tm1 = (DefaultTableModel) gdpTable.getModel();
+        DefaultTableModel tm2 = (DefaultTableModel) oilTable.getModel();
+        //Καθαρισμος Πίνακα GDP
+        if (gdpTable.getRowCount() !=0) {
+            for (int i = 0; i< gdpTable.getRowCount()-1; i++) {
+                tm1.removeRow(i);
+            }
+        }
+        //Καθαρισμός Πίνακα BP OIL
+        if (oilTable.getRowCount() !=0) {
+            for (int i = 0; i< oilTable.getRowCount()-1; i++) {
+                tm2.removeRow(i);
+            }
+        }
+    }
+    
+    private void fillTableGDP() {
+        DefaultTableModel tm1 = (DefaultTableModel) gdpTable.getModel();
+        for (int i = 0; i < GDPdata.size(); i++) {
+            Object[] row1 = {
+                GDPdata.get(i).getDataYear(),
+                GDPdata.get(i).getValue()
+            };
+            tm1.addRow(row1);
+        }
+    }
+    
+    private void fillTableOIL() {
+        DefaultTableModel tm2 = (DefaultTableModel) oilTable.getModel();
+        for (int i = 0; i < OILdata.size(); i++) {
+            Object[] row2 = {
+                OILdata.get(i).getDataYear(),
+                OILdata.get(i).getValue()
+            };
+            tm2.addRow(row2);
         }
     }
     
@@ -808,23 +680,7 @@ public class InsertDataGUI extends javax.swing.JFrame {
             endDateOil.setText(endDateOIL);
         }
     }
-    
-    private void fillTableGDP() {
-        for (int i = 0; i < GDPdata.size(); i++) {
-            //Εμφάνιση δεδομένων στον Πίνακα GDP 
-            gdpTable.setValueAt(GDPdata.get(i).getDataYear(), i, 0);
-            gdpTable.setValueAt(GDPdata.get(i).getValue(), i, 1);
-        }
-    }
-    
-    private void fillTableOIL() {
-        for (int i = 0; i < OILdata.size(); i++) {
-             //Εμφάνιση δεδομένων στον Πίνακα OIL
-            oilTable.setValueAt(OILdata.get(i).getDataYear(), i, 0);
-            oilTable.setValueAt(OILdata.get(i).getValue(), i, 1);
-        }
-    }
-    
+        
     private void draftBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_draftBtnActionPerformed
         //Εμφάνιση γραφήματος
         String title = "ΔΙΑΓΡΑΜΜΑ ΟΙΚΟΝΟΜΙΚΩΝ ΣΤΟΙΧΕΙΩΝ GDP ΚΑΙ BP OIL ΓΙΑ ΤΗΝ ΧΩΡΑ " + jComboBox1.getSelectedItem();
