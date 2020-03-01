@@ -22,7 +22,6 @@ public class restApi {
     public String getDataGDP(String urlGDP) {
         String url2 = "_NY_GDP_MKTP_CN.json?api_key=";
         String url = urlGDP+code+url2+key;        
-        //responseString = getData(url);
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url(url).build();
         try(Response response = client.newCall(request).execute()){
@@ -40,7 +39,6 @@ public class restApi {
     public String getDataBP(String urlBP) {
         String url2 = ".json?api_key=";
         String urlOIL = urlBP+code+url2+key;       
-        //responseString = getData(urlOIL);
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url(urlOIL).build();
         try(Response response = client.newCall(request).execute()){
