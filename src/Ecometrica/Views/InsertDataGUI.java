@@ -690,7 +690,7 @@ public class InsertDataGUI extends javax.swing.JFrame {
                 ShowDataOIL(responseBP);
             } else {
                 //Τα δεδομένα της χώρας ελιναι ηδη αποθηκευμλενα στην ΒΔ
-                JOptionPane.showMessageDialog(panel, "ΗΔΗ ΑΠΟΘΗΚΕΥΜΕΝΗ ΣΤΗΝ ΒΑΣΗ ΔΕΔΟΜΕΝΩΝ ΘΑ ΧΡΗΣΙΜΟΠΟΙΗΣΟΥΜΕ ΤΑ ΔΕΔΟΜΕΝΑ ΤΗΣ ΒΑΣΗΣ ΔΕΔΟΜΕΝΩΝ",
+                JOptionPane.showMessageDialog(panel, "ΗΔΗ ΑΠΟΘΗΚΕΥΜΕΝΗ ΣΤΗΝ ΒΑΣΗ ΔΕΔΟΜΕΝΩΝ ΘΑ ΧΡΗΣΙΜΟΠΟΙΗΣΟΥΜΕ ΤΑ ΑΠΟΘΗΚΕΥΜΕΝΑ ΔΕΔΟΜΕΝΑ",
                         "ΠΡΟΣΟΧΗ", JOptionPane.INFORMATION_MESSAGE);        
                 dbcheckLabel.setVisible(true);
                 dbCheckBox.setVisible(true);
