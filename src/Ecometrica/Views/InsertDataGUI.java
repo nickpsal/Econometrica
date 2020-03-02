@@ -61,7 +61,6 @@ public class InsertDataGUI extends javax.swing.JFrame {
         this.setTitle("ΕΜΦΑΝΙΣΗ ΟΙΚΟΝΟΜΙΚΩΝ ΣΤΟΙΧΕΩΝ");
         this.setSize(920, 670);
         this.setMinimumSize(new Dimension(920,670));
-        //this.setResizable(false);
         // Εισαγωγή Ονομάτων Χωρών στο ComboBox απο το αρχειο csv
         csvImport insert = new csvImport();
         countries = insert.importCountryNames();
