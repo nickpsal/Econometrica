@@ -722,11 +722,11 @@ public class InsertDataGUI extends javax.swing.JFrame {
     private void savetoDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savetoDBActionPerformed
         //Αποθήκευση Δεδομένων στην ΒΔ
         DataDB db = new DataDB();
-        boolean succ = db.InsertCountryData(countries,codes);
         //Εισαγωγή Δεδομένων στον Πίνακα Country
+        boolean succ = db.InsertCountryData(countries,codes);
         if (!succ) {
             JOptionPane.showMessageDialog(panel, "Αδύνατη η αποθήκευση δεδομένων στον Πίνακα COUNTRY",
-                        "ΣΦΑΛΜΑ", JOptionPane.INFORMATION_MESSAGE);
+                                                "ΣΦΑΛΜΑ", JOptionPane.INFORMATION_MESSAGE);
         }
         //Εισαγωγή Δεδομένων στον Πίνακα Country_Dataset για τα δεδομένα GDP
         succ = db.InsertDatasetGDP(codes[choise], StartDateGDP, EndDateGDP, NameGDP);
