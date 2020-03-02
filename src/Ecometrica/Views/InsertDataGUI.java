@@ -735,7 +735,7 @@ public class InsertDataGUI extends javax.swing.JFrame {
 						"ΣΦΑΛΜΑ", JOptionPane.INFORMATION_MESSAGE);
         }
         //Εισαγωγή Δεδομένων στον Πίνακα Country_Dataset για τα δεδομένα OIL
-        succ = db.InsertDatasetOIL(codes[choise],StartDateOIL, EndDateOIL, NameOIL,Desc);
+        succ = db.InsertDatasetOIL(StartDateOIL, EndDateOIL, NameOIL,Desc);
         if (!succ){
             JOptionPane.showMessageDialog(panel, "Αδύνατη η αποθήκευση δεδομένων στον Πίνακα COUNTRY_DATASET για OIL Concumption στην Βάση Δεδομένων",
 						"ΣΦΑΛΜΑ", JOptionPane.INFORMATION_MESSAGE);

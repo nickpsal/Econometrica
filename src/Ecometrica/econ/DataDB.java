@@ -96,7 +96,7 @@ public class DataDB {
         return succ;
     }
     
-    public boolean InsertDatasetOIL(String code, Date StartDateOIL,Date EndDateOIL,String NameOIL,String Desc){
+    public boolean InsertDatasetOIL(Date StartDateOIL,Date EndDateOIL,String NameOIL,String Desc){
         //Εισαγωγή δεδομένων στον Πίνακα Country_Dataset
         try{
             emf = Persistence.createEntityManagerFactory("EconometricaPU");
@@ -104,7 +104,6 @@ public class DataDB {
             em.getTransaction().begin();
             dataset2.setDatasetId(null);
             dataset2.setName(NameOIL);
-            country1.setIsoCode(code);
             dataset2.setCountryCode(country1);
             dataset2.setDescription(Desc);
             dataset2.setStartYear(sdf.format(StartDateOIL));
