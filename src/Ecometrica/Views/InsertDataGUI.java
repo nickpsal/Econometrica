@@ -59,8 +59,8 @@ public class InsertDataGUI extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("ΕΜΦΑΝΙΣΗ ΟΙΚΟΝΟΜΙΚΩΝ ΣΤΟΙΧΕΩΝ");
-        this.setSize(920, 670);
-        this.setMinimumSize(new Dimension(920,670));
+        this.setSize(920, 690);
+        this.setMinimumSize(new Dimension(920,690));
         // Εισαγωγή Ονομάτων Χωρών στο ComboBox απο το αρχειο csv
         csvImport insert = new csvImport();
         countries = insert.importCountryNames();
@@ -281,6 +281,7 @@ public class InsertDataGUI extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(6, 133, 0, 0);
         jPanel2.add(startDateGdp, gridBagConstraints);
 
+        gdpTable.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         gdpTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -316,6 +317,7 @@ public class InsertDataGUI extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(12, 133, 0, 57);
         jPanel2.add(jScrollPane1, gridBagConstraints);
 
+        oilTable.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         oilTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -501,8 +503,8 @@ public class InsertDataGUI extends javax.swing.JFrame {
         // Αν είναι 0 είναι η πρώτη επιλογή του Combobox που είναι ανενεργή 
         if (choise !=0) {
             boolean conn = db.TestConnection();
-               //Ελεγχος αν ειναι δυνατή η Συνδεση με την Βαση Δεδομένων
-               if (!conn) {
+            //Ελεγχος αν ειναι δυνατή η Συνδεση με την Βαση Δεδομένων
+            if (!conn) {
                 JOptionPane.showMessageDialog(panel, "ΑΔΥΝΑΤΗ ΣΕΝΔΕΣΗ ΣΤΗΝ ΒΑΣΗ ΔΕΔΟΜΕΝΩΝ",
                         "ΣΦΑΛΜΑ", JOptionPane.INFORMATION_MESSAGE);
             }
@@ -534,6 +536,7 @@ public class InsertDataGUI extends javax.swing.JFrame {
                         "ΠΡΟΣΟΧΗ", JOptionPane.INFORMATION_MESSAGE);        
                 dbcheckLabel.setVisible(true);
                 dbCheckBox.setVisible(true);
+                dbCheckBox.setEnabled(false);
                 draftBtn.setEnabled(true);
                 savetoDB.setEnabled(false);
                 //Παίρνουμε της Ημερομηνίες απο την Βάση Δεδομένων
