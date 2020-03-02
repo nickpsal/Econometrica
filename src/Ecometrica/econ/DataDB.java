@@ -42,15 +42,15 @@ public class DataDB {
         return conn;
     }
     
-    public boolean InsertCountryData(String[] lista, String[] kodikoi, int choise) {
+    public boolean InsertCountryData(String xora, String kodikos) {
         //Εισαγωγή δεδομένων στον Πίνακα Country
         try {
             emf = Persistence.createEntityManagerFactory("EconometricaPU");
             em = emf.createEntityManager();
             em.getTransaction().begin();
             // Εισαγωγή Δεδομένων στον Πινακας Country 
-            country1.setName(lista[choise]);
-            country1.setIsoCode(kodikoi[choise]);
+            country1.setName(xora);
+            country1.setIsoCode(kodikos);
             em.persist(country1);
             em.flush();
             em.getTransaction().commit(); 

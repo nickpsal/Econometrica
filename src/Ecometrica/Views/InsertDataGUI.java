@@ -519,7 +519,6 @@ public class InsertDataGUI extends javax.swing.JFrame {
             // Επιστρέφει false αν δεν υπάρχουν
             boolean succ = db.checkCountryData(countryCode);
             if (succ) {
-                // GDP δεδομένα
                 savetoDB.setEnabled(true);
                 //Καλούμε το api για να παρουμε τα δεδομένα απο την σελίδα
                 restApi api = new restApi(countryCode, key);
@@ -725,7 +724,7 @@ public class InsertDataGUI extends javax.swing.JFrame {
     private void savetoDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savetoDBActionPerformed
         //Αποθήκευση Δεδομένων στην ΒΔ
         DataDB db = new DataDB();
-        boolean succ = db.InsertCountryData(countries,codes, choise);
+        boolean succ = db.InsertCountryData(countries[choise],codes[choise]);
         //Εισαγωγή Δεδομένων στον Πίνακα Country
         if (!succ){
             JOptionPane.showMessageDialog(panel, "ΑΔΥΝΑΤΗ Η ΑΠΟΘΗΚΕΥΣΗ ΣΤΗΝ ΒΑΣΗ ΔΕΔΟΜΕΝΩΝ",
