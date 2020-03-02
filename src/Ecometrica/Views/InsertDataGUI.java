@@ -80,7 +80,7 @@ public class InsertDataGUI extends javax.swing.JFrame {
         //Απενεργοποίηση κουμπιού αποθήκευσης
         savetoDB.setEnabled(false);
         progBar.setVisible(false);
-        loadDataLabel.setVisible(false);
+        loadDataLabel.setVisible(false);  
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -496,10 +496,10 @@ public class InsertDataGUI extends javax.swing.JFrame {
         //Αρχικοποίηση Πίνακα εμφάνισης δεδομένων ή καθαρισμός του Πίνακα
         //σε πρίπτωση που είχαμε ξανακάνει πριν αναζήτηση
         EmptyTable();
+        DataDB db = new DataDB();
         // choise είναι το index του combobox.
         // Αν είναι 0 είναι η πρώτη επιλογή του Combobox που είναι ανενεργή 
         if (choise !=0) {
-            DataDB db = new DataDB();
             boolean conn = db.TestConnection();
                //Ελεγχος αν ειναι δυνατή η Συνδεση με την Βαση Δεδομένων
                if (!conn) {
@@ -698,7 +698,6 @@ public class InsertDataGUI extends javax.swing.JFrame {
         choise = jComboBox1.getSelectedIndex();
         if (choise !=0) {
             countryCode = codes[choise];
-            System.out.println(codes[choise]);
             String CountryGDP = "GDP (Current LCU) - " + String.valueOf(jComboBox1.getSelectedItem());
             String CountryOIL = "OIL Consumption - " + String.valueOf(jComboBox1.getSelectedItem());
             oilCountry.setText(CountryOIL);
@@ -723,20 +722,20 @@ public class InsertDataGUI extends javax.swing.JFrame {
     private void savetoDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savetoDBActionPerformed
         //Αποθήκευση Δεδομένων στην ΒΔ
         DataDB db = new DataDB();
-        boolean succ = db.InsertCountryData(countries[choise],codes[choise]);
+        boolean succ = db.InsertCountryData(countries,codes);
         //Εισαγωγή Δεδομένων στον Πίνακα Country
-        if (!succ){
-            JOptionPane.showMessageDialog(panel, "ΑΔΥΝΑΤΗ Η ΑΠΟΘΗΚΕΥΣΗ ΣΤΗΝ ΒΑΣΗ ΔΕΔΟΜΕΝΩΝ",
-						"ΣΦΑΛΜΑ", JOptionPane.INFORMATION_MESSAGE);
+        if (!succ) {
+            JOptionPane.showMessageDialog(panel, "Αδύνατη η αποθήκευση δεδομένων στον Πίνακα COUNTRY",
+                        "ΣΦΑΛΜΑ", JOptionPane.INFORMATION_MESSAGE);
         }
         //Εισαγωγή Δεδομένων στον Πίνακα Country_Dataset για τα δεδομένα GDP
-        succ = db.InsertDatasetGDP(StartDateGDP, EndDateGDP, NameGDP);
+        succ = db.InsertDatasetGDP(codes[choise], StartDateGDP, EndDateGDP, NameGDP);
         if (!succ){
             JOptionPane.showMessageDialog(panel, "Αδύνατη η αποθήκευση δεδομένων στον Πίνακα COUNTRY_DATASET για GDP (Πρωην LCU) στην Βάση Δεδομένων",
 						"ΣΦΑΛΜΑ", JOptionPane.INFORMATION_MESSAGE);
         }
         //Εισαγωγή Δεδομένων στον Πίνακα Country_Dataset για τα δεδομένα OIL
-        succ = db.InsertDatasetOIL(StartDateOIL, EndDateOIL, NameOIL,Desc);
+        succ = db.InsertDatasetOIL(codes[choise],StartDateOIL, EndDateOIL, NameOIL,Desc);
         if (!succ){
             JOptionPane.showMessageDialog(panel, "Αδύνατη η αποθήκευση δεδομένων στον Πίνακα COUNTRY_DATASET για OIL Concumption στην Βάση Δεδομένων",
 						"ΣΦΑΛΜΑ", JOptionPane.INFORMATION_MESSAGE);

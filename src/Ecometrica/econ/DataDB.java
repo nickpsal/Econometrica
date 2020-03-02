@@ -42,18 +42,26 @@ public class DataDB {
         return conn;
     }
     
-    public boolean InsertCountryData(String xora, String kodikos) {
+    public boolean InsertCountryData(String[] xora, String[] kodikos) {
         //Εισαγωγή δεδομένων στον Πίνακα Country
         try {
             emf = Persistence.createEntityManagerFactory("EconometricaPU");
             em = emf.createEntityManager();
             em.getTransaction().begin();
-            // Εισαγωγή Δεδομένων στον Πινακας Country 
-            country1.setName(xora);
-            country1.setIsoCode(kodikos);
-            em.persist(country1);
-            em.flush();
-            em.getTransaction().commit(); 
+            List<Country> countries = getCountry();
+            if (countries.isEmpty()){
+                // Εισαγωγή Δεδομένων στον Πινακας Country 
+                for (int i = 1; i<xora.length;i++) {
+                    Country country = new Country();
+                    String name = xora[i];
+                    String code = kodikos[i];
+                    country.setName(name);
+                    country.setIsoCode(code);
+                    em.persist(country);
+                }
+                em.flush();
+                em.getTransaction().commit(); 
+            }
             succ = true;
         }catch (Exception exp) {
             succ = false;
@@ -63,7 +71,7 @@ public class DataDB {
         return succ;
     }
     
-    public boolean InsertDatasetGDP(Date StartDateGDP,Date EndDateGDP,String NameGDP){
+    public boolean InsertDatasetGDP(String code, Date StartDateGDP,Date EndDateGDP,String NameGDP){
         //Εισαγωγή δεδομένων στον Πίνακα Country_Dataset
         try {
             emf = Persistence.createEntityManagerFactory("EconometricaPU");
@@ -72,6 +80,7 @@ public class DataDB {
             //Εισαγωγη Δεδομένων στον Πίνακα Country_Dataset για τα δεδομενα GDP
             dataset1.setDatasetId(null);
             dataset1.setName(NameGDP);
+            country1.setIsoCode(code);
             dataset1.setCountryCode(country1);
             dataset1.setDescription(NameGDP);
             dataset1.setStartYear(sdf.format(StartDateGDP));
@@ -87,7 +96,7 @@ public class DataDB {
         return succ;
     }
     
-    public boolean InsertDatasetOIL(Date StartDateOIL,Date EndDateOIL,String NameOIL,String Desc){
+    public boolean InsertDatasetOIL(String code, Date StartDateOIL,Date EndDateOIL,String NameOIL,String Desc){
         //Εισαγωγή δεδομένων στον Πίνακα Country_Dataset
         try{
             emf = Persistence.createEntityManagerFactory("EconometricaPU");
@@ -95,6 +104,7 @@ public class DataDB {
             em.getTransaction().begin();
             dataset2.setDatasetId(null);
             dataset2.setName(NameOIL);
+            country1.setIsoCode(code);
             dataset2.setCountryCode(country1);
             dataset2.setDescription(Desc);
             dataset2.setStartYear(sdf.format(StartDateOIL));
@@ -162,18 +172,20 @@ public class DataDB {
     public boolean checkCountryData(String code) {
         //ΈΛεγχος αν έχουν αποθηκευτεί δεδομένα απο την χώρα που επιλέξαμε
         try {
-            List<CountryData> checkCountryData = new ArrayList<>();
             emf = Persistence.createEntityManagerFactory("EconometricaPU");
             em = emf.createEntityManager();
             em.getTransaction().begin();
-            country1.setIsoCode(code);
-            List<Country> xora = getCountry();
+            List<CountryDataset> dataset = getCountryDataset();
             succ = true;
-            Query q = em.createQuery("SELECT c FROM Country c WHERE c.isoCode = :code",Country.class);
-            q.setParameter("code", code);
-            checkCountryData.addAll(q.getResultList());
-            if (!checkCountryData.isEmpty()){
-                succ = false;
+            country1.setIsoCode(code);
+            CountryDataset dset = new CountryDataset();
+            dset.setCountryCode(country1);
+            if (!dataset.isEmpty()){
+                for (CountryDataset data:dataset){
+                    if (data.getCountryCode().equals(dset.getCountryCode())){
+                        succ = false;
+                    }
+                }
             }
         }catch (Exception exp) {
             succ = false;
