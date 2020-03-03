@@ -75,7 +75,7 @@
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="fetchBtn" pref="38" max="32767" attributes="0"/>
+                      <Component id="fetchBtn" max="32767" attributes="0"/>
                       <Component id="jComboBox1" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -133,7 +133,7 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jPanel2" pref="448" max="32767" attributes="0"/>
+                      <Component id="jPanel2" pref="496" max="32767" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="dbcheckLabel" alignment="3" min="-2" max="-2" attributes="0"/>

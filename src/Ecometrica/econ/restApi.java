@@ -19,6 +19,7 @@ public class restApi {
         this.key=key;
     }
     //Παίρνουμε τα δεδομένα JSON απο την σελίδα
+    //για τα δεδομένα GDP
     public String getDataGDP(String urlGDP) {
         String url2 = "_NY_GDP_MKTP_CN.json?api_key=";
         String url = urlGDP+code+url2+key;        
@@ -36,6 +37,7 @@ public class restApi {
     }
     
     //Παίρνουμε τα δεδομένα JSON απο την σελίδα
+    //για τα δεδομένα BP OIL Consumption
     public String getDataBP(String urlBP) {
         String url2 = ".json?api_key=";
         String urlOIL = urlBP+code+url2+key;       
