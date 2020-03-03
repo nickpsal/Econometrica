@@ -497,7 +497,6 @@ public class InsertDataGUI extends javax.swing.JFrame {
     private void fetchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fetchBtnActionPerformed
         //Αρχικοποίηση Πίνακα εμφάνισης δεδομένων ή καθαρισμός του Πίνακα
         //σε πρίπτωση που είχαμε ξανακάνει πριν αναζήτηση
-        EmptyTable();
         DataDB db = new DataDB();
         // choise είναι το index του combobox.
         // Αν είναι 0 είναι η πρώτη επιλογή του Combobox που είναι ανενεργή 
@@ -528,6 +527,7 @@ public class InsertDataGUI extends javax.swing.JFrame {
                 String responseGDP = api.getDataGDP(url1);
                 String responseBP = api.getDataBP(url2);
                 //Εκτύπωση δεδομένων σε περίπτωση που υπάρχουν δεδομένα
+                EmptyTable();
                 ShowDataGDP(responseGDP);
                 ShowDataOIL(responseBP);
             } else {
@@ -549,6 +549,7 @@ public class InsertDataGUI extends javax.swing.JFrame {
                 ShowDatesGDP(datesGDP);
                 ShowDatesOIL(datesOIL);
                 //Γεμίζουμε τον Πίνακα με τα δεδομένα GDP και OIL
+                EmptyTable();
                 fillTableGDP();
                 fillTableOIL();
             }
