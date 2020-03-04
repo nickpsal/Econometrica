@@ -68,6 +68,7 @@ public class InsertDataGUI extends javax.swing.JFrame {
         //Δημιουργια Πίνακα με όνοματα χώρας και Πίνακα με
         //κωδικο κάθε χώρας
         jComboBox1.setModel(new DefaultComboBoxModel<>(countries));    
+        jComboBox1.setSelectedItem("GREECE");
         //Αρχικοποίηση ετικετών για τα Όνοματα των Χωρών που επιλέγουμε
         oilCountry.setText("");
         gdpCountry.setText("");
