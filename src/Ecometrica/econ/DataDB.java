@@ -33,7 +33,6 @@ public class DataDB {
     public boolean TestConnection() {
         boolean conn = true;
         try{
-            emf = Persistence.createEntityManagerFactory("EconometricaPU");
             em = emf.createEntityManager();
             em.getTransaction().begin();
         }catch (Exception exp){
