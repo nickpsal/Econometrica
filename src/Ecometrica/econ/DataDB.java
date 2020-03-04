@@ -33,6 +33,7 @@ public class DataDB {
     public boolean TestConnection() {
         boolean conn = true;
         try{
+            emf = Persistence.createEntityManagerFactory("EconometricaPU");
             em = emf.createEntityManager();
             em.getTransaction().begin();
         }catch (Exception exp){
@@ -44,6 +45,7 @@ public class DataDB {
     public boolean InsertCountryData(String[] xora, String[] kodikos) {
         //Εισαγωγή δεδομένων στον Πίνακα Country
         try {
+            emf = Persistence.createEntityManagerFactory("EconometricaPU");
             em = emf.createEntityManager();
             em.getTransaction().begin();
             List<Country> countries = getCountry();
@@ -70,6 +72,7 @@ public class DataDB {
     public boolean InsertDatasetGDP(String code, Date StartDateGDP,Date EndDateGDP,String NameGDP){
         //Εισαγωγή δεδομένων στον Πίνακα Country_Dataset
         try {
+            emf = Persistence.createEntityManagerFactory("EconometricaPU");
             em = emf.createEntityManager();
             em.getTransaction().begin();
             //Εισαγωγη Δεδομένων στον Πίνακα Country_Dataset για τα δεδομενα GDP
@@ -94,6 +97,7 @@ public class DataDB {
     public boolean InsertDatasetOIL(Date StartDateOIL,Date EndDateOIL,String NameOIL,String Desc){
         //Εισαγωγή δεδομένων στον Πίνακα Country_Dataset
         try{
+            emf = Persistence.createEntityManagerFactory("EconometricaPU");
             em = emf.createEntityManager();
             em.getTransaction().begin();
             dataset2.setDatasetId(null);
@@ -116,6 +120,7 @@ public class DataDB {
     public boolean InsertCountryDataGDP(List<CountryData> GDPdata) {
         //Εισαγωγή δεδομένων στον Πίνακα Country_Data
         try {
+            emf = Persistence.createEntityManagerFactory("EconometricaPU");
             em = emf.createEntityManager();
             em.getTransaction().begin();
             for (int i = 0; i<GDPdata.size(); i++) {
@@ -140,6 +145,7 @@ public class DataDB {
     public boolean InsertCountryDataOIL(List<CountryData> OILdata){
         //Εισαγωγή δεδομένων στον Πίνακα Country_Data
         try {
+            emf = Persistence.createEntityManagerFactory("EconometricaPU");
             em = emf.createEntityManager();
             em.getTransaction().begin();
             for (int i = 0; i < OILdata.size(); i++) {
@@ -163,6 +169,7 @@ public class DataDB {
     public boolean checkCountryData(String code) {
         //ΈΛεγχος αν έχουν αποθηκευτεί δεδομένα απο την χώρα που επιλέξαμε
         try {
+            emf = Persistence.createEntityManagerFactory("EconometricaPU");
             em = emf.createEntityManager();
             em.getTransaction().begin();
             List<CountryDataset> dataset = getCountryDataset();
@@ -187,6 +194,7 @@ public class DataDB {
     
     public ArrayList getDatesGDP(String Ccode, String Country) {
         // Παίρνουμε τις ημερομηνίες Πρωτης και τελευταίας μέτρησης απο την ΒΔ
+        emf = Persistence.createEntityManagerFactory("EconometricaPU");
         em = emf.createEntityManager();
         em.getTransaction().begin();
         ArrayList<String> datesSetGDP = new ArrayList<>();
@@ -224,6 +232,7 @@ public class DataDB {
         //Παίρνουμε τα δεδομένα απο την ΒΔ
         int xoraid = 0;
         List<CountryData> dataGPD = new ArrayList<>();
+        emf = Persistence.createEntityManagerFactory("EconometricaPU");
         em = emf.createEntityManager();
         em.getTransaction().begin();
         List<CountryDataset> dataset = getCountryDataset();
@@ -244,6 +253,7 @@ public class DataDB {
         //Παίρνουμε τα δεδομένα απο την ΒΔ
         int xoraid = 0;
         List<CountryData> dataOIL = new ArrayList<>();
+        emf = Persistence.createEntityManagerFactory("EconometricaPU");
         em = emf.createEntityManager();
         em.getTransaction().begin();
         List<CountryDataset> dataset = getCountryDataset();
@@ -264,6 +274,7 @@ public class DataDB {
     public boolean emptyDB() {
         //Άδειασμα Πινάκων Βάσης Δεδομένων
         try {
+            emf = Persistence.createEntityManagerFactory("EconometricaPU");
             em = emf.createEntityManager();
             em.getTransaction().begin();
             List<Country> countries = getCountry();
