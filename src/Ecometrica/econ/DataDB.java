@@ -53,10 +53,8 @@ public class DataDB {
                 // Εισαγωγή Δεδομένων στον Πινακας Country 
                 for (int i = 1; i<xora.length;i++) {
                     Country country = new Country();
-                    String name = xora[i];
-                    String code = kodikos[i];
-                    country.setName(name);
-                    country.setIsoCode(code);
+                    country.setName(xora[i]);
+                    country.setIsoCode(kodikos[i]);
                     em.persist(country);
                 }
                 em.flush();
