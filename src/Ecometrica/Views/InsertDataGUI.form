@@ -367,8 +367,8 @@
                         </Property>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="2" rowCount="0">
-                            <Column editable="false" title="&#x395;&#x3a4;&#x39f;&#x3a3;" type="java.lang.Object"/>
-                            <Column editable="false" title="&#x3a4;&#x399;&#x39c;&#x397;" type="java.lang.Object"/>
+                            <Column editable="false" title="&#x395;&#x3a4;&#x39f;&#x3a3;" type="java.lang.String"/>
+                            <Column editable="false" title="&#x3a4;&#x399;&#x39c;&#x397;" type="java.lang.String"/>
                           </Table>
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -411,8 +411,8 @@
                         </Property>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="2" rowCount="0">
-                            <Column editable="false" title="&#x395;&#x3a4;&#x39f;&#x3a3;" type="java.lang.Object"/>
-                            <Column editable="false" title="&#x3a4;&#x399;&#x39c;&#x397;" type="java.lang.Object"/>
+                            <Column editable="false" title="&#x395;&#x3a4;&#x39f;&#x3a3;" type="java.lang.String"/>
+                            <Column editable="false" title="&#x3a4;&#x399;&#x39c;&#x397;" type="java.lang.String"/>
                           </Table>
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

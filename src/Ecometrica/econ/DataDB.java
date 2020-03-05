@@ -8,7 +8,6 @@ package Ecometrica.econ;
 import Pojos.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -200,7 +199,7 @@ public class DataDB {
         em = emf.createEntityManager();
         em.getTransaction().begin();
         CountryDataset dataset = new CountryDataset();
-        String name = "GDP (Current LCU) for " + Country;     
+        String name = "GDP (Current LCU) - " + Country;     
         country1.setIsoCode(Ccode);
         dataset1.setCountryCode(country1);
         TypedQuery<CountryDataset> q1 = em.createQuery("SELECT c FROM CountryDataset c WHERE c.countryCode = :dataset1 AND c.name =:name",CountryDataset.class);
@@ -237,7 +236,7 @@ public class DataDB {
         em = emf.createEntityManager();
         em.getTransaction().begin();
         List<CountryDataset> dataset = getCountryDataset();
-        String name = "GDP (Current LCU) for " + Country; 
+        String name = "GDP (Current LCU) - " + Country; 
         country1.setIsoCode(Ccode);
         dataset2.setCountryCode(country1);
         for (CountryDataset data:dataset) {

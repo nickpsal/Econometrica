@@ -12,6 +12,7 @@ import Pojos.CountryDataset;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -40,6 +41,7 @@ public class InsertDataGUI extends javax.swing.JFrame {
     private String countryCode;
     int choise;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    DecimalFormat df = new DecimalFormat("#.##");
     //api key
     private final String key = "xt8bLEyhssQMhYbri3_C";
     private Date StartDateGDP;
@@ -292,9 +294,16 @@ public class InsertDataGUI extends javax.swing.JFrame {
                 "ΕΤΟΣ", "ΤΙΜΗ"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -328,9 +337,16 @@ public class InsertDataGUI extends javax.swing.JFrame {
                 "ΕΤΟΣ", "ΤΙΜΗ"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -541,6 +557,10 @@ public class InsertDataGUI extends javax.swing.JFrame {
                 dbCheckBox.setEnabled(false);
                 draftBtn.setEnabled(true);
                 savetoDB.setEnabled(false);
+                NameGDP = "GDP (Current LCU) - " + jComboBox1.getSelectedItem();
+                NameOIL = "Oil Consumption - " + jComboBox1.getSelectedItem();
+                gdpCountry.setText(NameGDP);
+                oilCountry.setText(NameOIL);
                 //Παίρνουμε της Ημερομηνίες απο την Βάση Δεδομένων
                 CountryDataset datesGDP = db.getDatesGDP(countryCode, String.valueOf(jComboBox1.getSelectedItem()));
                 CountryDataset datesOIL = db.getDateOIL(countryCode, String.valueOf(jComboBox1.getSelectedItem()));
@@ -585,7 +605,8 @@ public class InsertDataGUI extends javax.swing.JFrame {
             EndDateGDP = jdata.dataGDPGetNewestDate(responseGDP);
             startDateGdp.setText("ΗΜΕΡΟΜΗΝΙΑ ΕΚΚΙΝΗΣΗΣ " + " " + sdf.format(StartDateGDP));
             endDateGdp.setText("ΤΕΛΕΥΤΑΙΑ ΗΜΕΡΟΜΗΝΙΑ " + " " + sdf.format(EndDateGDP));
-            NameGDP = "GDP (Current LCU) for " + jComboBox1.getSelectedItem();
+            NameGDP = "GDP (Current LCU) - " + jComboBox1.getSelectedItem();
+            gdpCountry.setText(NameGDP);
             GDPdata = jdata.getGDPdata(responseGDP);
             fillTableGDP();
             GDPData = true;
@@ -614,6 +635,7 @@ public class InsertDataGUI extends javax.swing.JFrame {
             endDateOil.setText("ΤΕΛΕΥΤΑΙΑ ΗΜΕΡΟΜΗΝΙΑ " + " " + sdf.format(EndDateOIL));
             NameOIL = "Oil Consumption - " + jComboBox1.getSelectedItem();
             Desc = "Oil Consumption - " + jComboBox1.getSelectedItem() + ". Million tonnes.";
+            oilCountry.setText(NameOIL);
             //Εκτύπωση δεδομένων σε περίπτωση που υπάρχουν δεδομένα
             OILdata = jdata.getOILdata(responseBP);
             fillTableOIL();
