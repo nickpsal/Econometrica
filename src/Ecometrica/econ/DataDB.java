@@ -15,6 +15,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -193,44 +194,39 @@ public class DataDB {
         return succ;
     }
     
-    public ArrayList getDatesGDP(String Ccode, String Country) {
+    public CountryDataset getDatesGDP(String Ccode, String Country) {
         // Παίρνουμε τις ημερομηνίες Πρωτης και τελευταίας μέτρησης απο την ΒΔ
         emf = Persistence.createEntityManagerFactory("EconometricaPU");
         em = emf.createEntityManager();
         em.getTransaction().begin();
-        ArrayList<String> datesSetGDP = new ArrayList<>();
-        List<CountryDataset> dataset = getCountryDataset();
+        CountryDataset dataset = new CountryDataset();
         String name = "GDP (Current LCU) for " + Country;     
         country1.setIsoCode(Ccode);
         dataset1.setCountryCode(country1);
-        for (CountryDataset data:dataset) {
-            if ((data.getCountryCode().equals(dataset1.getCountryCode())) && (data.getName().equalsIgnoreCase(name))){
-                datesSetGDP.add(data.getStartYear());
-                datesSetGDP.add(data.getEndYear());
-            }
-        }
+        TypedQuery<CountryDataset> q1 = em.createQuery("SELECT c FROM CountryDataset c WHERE c.countryCode = :dataset1 AND c.name =:name",CountryDataset.class);
+        q1.setParameter("dataset1", country1);
+        q1.setParameter("name", name);
+        dataset = q1.getSingleResult();
         em.close();
-        return datesSetGDP;
+        return dataset;
     }
     
-    public ArrayList getDateOIL(String Ccode, String Country) {
+    public CountryDataset getDateOIL(String Ccode, String Country) {
         // Παίρνουμε τις ημερομηνίες Πρωτης και τελευταίας μέτρησης απο την ΒΔ
         emf = Persistence.createEntityManagerFactory("EconometricaPU");
         em = emf.createEntityManager();
         em.getTransaction().begin();
-        ArrayList<String> datesSetOIL = new ArrayList<>();
-        List<CountryDataset> dataset = getCountryDataset();
-        String name = "OIL Consumption - " + Country;       
+        CountryDataset dataset = new CountryDataset();
+        String name = "Oil Consumption - " + Country;      
         country1.setIsoCode(Ccode);
-        dataset2.setCountryCode(country1);
-        for (CountryDataset data:dataset) {
-            if ((data.getCountryCode().equals(dataset2.getCountryCode())) && (data.getName().equalsIgnoreCase(name))){
-                datesSetOIL.add(data.getStartYear());
-                datesSetOIL.add(data.getEndYear());
-            }
-        }
+        dataset1.setCountryCode(country1);
+        TypedQuery<CountryDataset> q2 = em.createQuery("SELECT c FROM CountryDataset c WHERE c.countryCode = :dataset1 AND c.name =:name",CountryDataset.class);
+        q2.setParameter("dataset1", country1);
+        q2.setParameter("name", name);
+        dataset = q2.getSingleResult();
+        System.out.println(dataset.getStartYear());
         em.close();
-        return datesSetOIL;
+        return dataset;
     }
     
     public  List<CountryData> getDataGDP(String Ccode, String Country) {

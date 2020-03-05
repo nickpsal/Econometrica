@@ -8,6 +8,7 @@ package Ecometrica.Views;
 import javax.swing.DefaultComboBoxModel;
 import Ecometrica.econ.*;
 import Pojos.CountryData;
+import Pojos.CountryDataset;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -541,8 +542,8 @@ public class InsertDataGUI extends javax.swing.JFrame {
                 draftBtn.setEnabled(true);
                 savetoDB.setEnabled(false);
                 //Παίρνουμε της Ημερομηνίες απο την Βάση Δεδομένων
-                ArrayList<String> datesGDP = db.getDatesGDP(countryCode, String.valueOf(jComboBox1.getSelectedItem()));
-                ArrayList<String> datesOIL = db.getDateOIL(countryCode, String.valueOf(jComboBox1.getSelectedItem()));
+                CountryDataset datesGDP = db.getDatesGDP(countryCode, String.valueOf(jComboBox1.getSelectedItem()));
+                CountryDataset datesOIL = db.getDateOIL(countryCode, String.valueOf(jComboBox1.getSelectedItem()));
                 GDPdata = db.getDataGDP(countryCode, String.valueOf(jComboBox1.getSelectedItem()));
                 OILdata = db.getDataOIL(countryCode, String.valueOf(jComboBox1.getSelectedItem()));
                 //Εμφάνιση των δεδομένων στο γραφικό Περιβάλλον
@@ -668,24 +669,18 @@ public class InsertDataGUI extends javax.swing.JFrame {
         }
     }
     
-    private void ShowDatesGDP(ArrayList<String> datesGDP) {
-        if (!datesGDP.isEmpty()) {
-            //Αν η λίστα με τις ημερομηνίες δεν είναι αδεια εμφανίζει τα δεδομένα
-            String startDateGDP = "ΗΜΕΡΟΜΗΝΙΑ ΕΚΚΙΝΗΣΗΣ " + " " + datesGDP.get(0) + "-12-31";
-            String endDateGDP = "ΤΕΛΕΥΤΑΙΑ ΗΜΕΡΟΜΗΝΙΑ " + " " + datesGDP.get(1) + "-12-31";
-            startDateGdp.setText(startDateGDP);
-            endDateGdp.setText(endDateGDP);
-        }
+    private void ShowDatesGDP(CountryDataset datesGDP) {
+        String startDateGDP = "ΗΜΕΡΟΜΗΝΙΑ ΕΚΚΙΝΗΣΗΣ " + " " + datesGDP.getStartYear() + "-12-31";
+        String endDateGDP = "ΤΕΛΕΥΤΑΙΑ ΗΜΕΡΟΜΗΝΙΑ " + " " + datesGDP.getEndYear() + "-12-31";
+        startDateGdp.setText(startDateGDP);
+        endDateGdp.setText(endDateGDP);
     }
     
-    private void ShowDatesOIL(ArrayList<String> datesOIL) {
-        if (!datesOIL.isEmpty()) {
-            //Αν η λίστα με τις ημερομηνίες δεν είναι αδεια εμφανίζει τα δεδομένα
-            String startDateOIL = "ΗΜΕΡΟΜΗΝΙΑ ΕΚΚΙΝΗΣΗΣ " + " " + datesOIL.get(0) + "-12-31";
-            String endDateOIL = "ΤΕΛΕΥΤΑΙΑ ΗΜΕΡΟΜΗΝΙΑ " + " " + datesOIL.get(1) + "-12-31";
-            startDateOil.setText(startDateOIL);
-            endDateOil.setText(endDateOIL);
-        }
+    private void ShowDatesOIL(CountryDataset datesOIL) {
+        String startDateOIL = "ΗΜΕΡΟΜΗΝΙΑ ΕΚΚΙΝΗΣΗΣ " + " " + datesOIL.getStartYear() + "-12-31";
+        String endDateOIL = "ΤΕΛΕΥΤΑΙΑ ΗΜΕΡΟΜΗΝΙΑ " + " " + datesOIL.getEndYear() + "-12-31";
+        startDateOil.setText(startDateOIL);
+        endDateOil.setText(endDateOIL);
     }
         
     private void draftBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_draftBtnActionPerformed
