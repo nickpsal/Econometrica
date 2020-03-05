@@ -8,6 +8,7 @@ package Ecometrica.econ;
 import Pojos.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -200,8 +201,10 @@ public class DataDB {
         ArrayList<String> datesSetGDP = new ArrayList<>();
         List<CountryDataset> dataset = getCountryDataset();
         String name = "GDP (Current LCU) for " + Country;     
+        country1.setIsoCode(Ccode);
+        dataset1.setCountryCode(country1);
         for (CountryDataset data:dataset) {
-            if ((data.getCountryCode().getIsoCode().equalsIgnoreCase(Ccode)) && (data.getName().equalsIgnoreCase(name))){
+            if ((data.getCountryCode().equals(dataset1.getCountryCode())) && (data.getName().equalsIgnoreCase(name))){
                 datesSetGDP.add(data.getStartYear());
                 datesSetGDP.add(data.getEndYear());
             }
@@ -218,8 +221,10 @@ public class DataDB {
         ArrayList<String> datesSetOIL = new ArrayList<>();
         List<CountryDataset> dataset = getCountryDataset();
         String name = "OIL Consumption - " + Country;       
+        country1.setIsoCode(Ccode);
+        dataset2.setCountryCode(country1);
         for (CountryDataset data:dataset) {
-            if ((data.getCountryCode().getIsoCode().equalsIgnoreCase(Ccode)) && (data.getName().equalsIgnoreCase(name))){
+            if ((data.getCountryCode().equals(dataset2.getCountryCode())) && (data.getName().equalsIgnoreCase(name))){
                 datesSetOIL.add(data.getStartYear());
                 datesSetOIL.add(data.getEndYear());
             }
@@ -237,8 +242,10 @@ public class DataDB {
         em.getTransaction().begin();
         List<CountryDataset> dataset = getCountryDataset();
         String name = "GDP (Current LCU) for " + Country; 
+        country1.setIsoCode(Ccode);
+        dataset2.setCountryCode(country1);
         for (CountryDataset data:dataset) {
-            if ((data.getCountryCode().getIsoCode().equalsIgnoreCase(Ccode)) && (data.getName().equalsIgnoreCase(name))){
+            if ((data.getCountryCode().equals(dataset2.getCountryCode())) && (data.getName().equalsIgnoreCase(name))){
                 xoraid = data.getDatasetId();
             }
         }
