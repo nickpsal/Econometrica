@@ -11,6 +11,7 @@ package Ecometrica.econ;
  */
 import Pojos.CountryData;
 import java.awt.Color;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +52,6 @@ public class DualAxis extends JFrame {
             true, 
             false
         );
-        
         final XYPlot plot = chart.getXYPlot();
         final NumberAxis axis2 = new NumberAxis("OIL Consumption");
         axis2.setAutoRangeIncludesZero(false);
@@ -64,15 +64,27 @@ public class DualAxis extends JFrame {
             final StandardXYItemRenderer rr = (StandardXYItemRenderer) renderer;
             rr.setShapesFilled(true);
         }
+        NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
+        NumberFormat formatter = NumberFormat.getIntegerInstance();
+        rangeAxis.setNumberFormatOverride(formatter);
         
-        final StandardXYItemRenderer renderer2 = new StandardXYItemRenderer();
-        renderer2.setSeriesPaint(0, Color.black);
+        final StandardXYItemRenderer renderer0 = new StandardXYItemRenderer();
+        renderer0.setSeriesPaint(0, Color.black);
+        renderer0.setPlotLines(true);
+        renderer0.setBaseShapesVisible(true);
         renderer.setToolTipGenerator(StandardXYToolTipGenerator.getTimeSeriesInstance());
-        plot.setRenderer(1, renderer2);
+        plot.setRenderer(0, renderer0);
         
+        final StandardXYItemRenderer renderer1 = new StandardXYItemRenderer();
+        renderer1.setSeriesPaint(0, Color.blue);
+        renderer1.setPlotLines(true);
+        renderer1.setBaseShapesVisible(true);
+        renderer.setToolTipGenerator(StandardXYToolTipGenerator.getTimeSeriesInstance());
+        plot.setRenderer(1, renderer1);
+        
+        renderer1.setBaseShapesVisible(true);
         final DateAxis axis = (DateAxis) plot.getDomainAxis();
         axis.setDateFormatOverride(new SimpleDateFormat("yyyy"));
-        
         final ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new java.awt.Dimension(920, 700));
         setContentPane(chartPanel);
