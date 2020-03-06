@@ -11,11 +11,14 @@ package Ecometrica.econ;
  */
 import Pojos.CountryData;
 import java.awt.Color;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.JFrame;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -73,17 +76,17 @@ public class DualAxis extends JFrame {
         renderer0.setSeriesPaint(0, Color.black);
         renderer0.setPlotLines(true);
         renderer0.setBaseShapesVisible(true);
-        renderer.setToolTipGenerator(StandardXYToolTipGenerator.getTimeSeriesInstance());
+        renderer0.setToolTipGenerator(StandardXYToolTipGenerator.getTimeSeriesInstance());
         plot.setRenderer(0, renderer0);
         
         final StandardXYItemRenderer renderer1 = new StandardXYItemRenderer();
         renderer1.setSeriesPaint(0, Color.blue);
         renderer1.setPlotLines(true);
         renderer1.setBaseShapesVisible(true);
-        renderer.setToolTipGenerator(StandardXYToolTipGenerator.getTimeSeriesInstance());
+        renderer1.setToolTipGenerator(StandardXYToolTipGenerator.getTimeSeriesInstance());
+        
         plot.setRenderer(1, renderer1);
         
-        renderer1.setBaseShapesVisible(true);
         final DateAxis axis = (DateAxis) plot.getDomainAxis();
         axis.setDateFormatOverride(new SimpleDateFormat("yyyy"));
         final ChartPanel chartPanel = new ChartPanel(chart);
@@ -102,7 +105,7 @@ public class DualAxis extends JFrame {
     }
     //Τιμές για τα δεδομένα OIL COncumption
     private XYDataset createDataset2() {
-        final TimeSeries s2 = new TimeSeries("OIL Consumption Data", Year.class);  
+        final TimeSeries s2 = new TimeSeries("BP OIL Consumption", Year.class);  
         for (int i = 0;i<OILdata.size();i++) {
             s2.add(new Year(Integer.parseInt(OILdata.get(i).getDataYear())),Float.parseFloat(OILdata.get(i).getValue()));
         }    
