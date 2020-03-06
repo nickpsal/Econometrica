@@ -25,6 +25,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.DateAxis;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.NumberTickUnit;
 import org.jfree.chart.labels.StandardXYToolTipGenerator;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.StandardXYItemRenderer;
@@ -71,7 +72,7 @@ public class DualAxis extends JFrame {
         NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
         NumberFormat formatter = NumberFormat.getIntegerInstance();
         rangeAxis.setNumberFormatOverride(formatter);
-        
+
         final StandardXYItemRenderer renderer0 = new StandardXYItemRenderer();
         renderer0.setSeriesPaint(0, Color.black);
         renderer0.setPlotLines(true);
@@ -92,8 +93,8 @@ public class DualAxis extends JFrame {
         final ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new java.awt.Dimension(920, 700));
         setContentPane(chartPanel);
-
     }
+    
     //Τιμές για τα δεδομένα GDP
     private XYDataset createDataset1() {
         final TimeSeries s1 = new TimeSeries("GDP (Current LCU) Data", Year.class);  
@@ -103,6 +104,7 @@ public class DualAxis extends JFrame {
         dataset2.addSeries(s1);
         return dataset2;
     }
+    
     //Τιμές για τα δεδομένα OIL COncumption
     private XYDataset createDataset2() {
         final TimeSeries s2 = new TimeSeries("BP OIL Consumption", Year.class);  
