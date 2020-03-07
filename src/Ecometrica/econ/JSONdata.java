@@ -76,7 +76,6 @@ public class JSONdata {
     //Παίρνουμε τα δεδομένα των μετρήσεων BP OIL απο τα δεδομένα JSON
     public List<CountryData> getOILdata(String responseBP) {
         List<CountryData> OILdata = new ArrayList<>();
-        DecimalFormat df = new DecimalFormat("##.##");
         GDPandOIL gp = getallData(responseBP);
         for (int i = 0; i < gp.getData().size(); i++) {
             LocalDate date = LocalDate.parse(gp.getData().get(i).get(0));
