@@ -1,0 +1,41 @@
+Tue Mar 03 09:07:07 EET 2020 : Apache Derby Network Server - 10.11.1.2 - (1629631) started and ready to accept connections on port 1527
+----------------------------------------------------------------
+Tue Mar 03 09:07:07 EET 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0170-9f38-3ac6-ffffcdf95367 
+on database directory C:\Users\nickp\OneDrive\Έγγραφα\NetBeansProjects\Econometrica\EconometricaDB\Econometrica with class loader sun.misc.Launcher$AppClassLoader@6f94fa3e 
+Loaded from file:/C:/Program%20Files/Java/jdk1.8.0_111/db/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_111-b14
+user.dir=C:\Program Files\Java\jdk1.8.0_111\db
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=C:\Users\nickp\OneDrive\Έγγραφα\NetBeansProjects\Econometrica\EconometricaDB
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Tue Mar 03 09:07:56 EET 2020: Shutting down Derby engine
+----------------------------------------------------------------
+Tue Mar 03 09:07:56 EET 2020:
+Shutting down instance a816c00e-0170-9f38-3ac6-ffffcdf95367 on database directory C:\Users\nickp\OneDrive\Έγγραφα\NetBeansProjects\Econometrica\EconometricaDB\Econometrica with class loader sun.misc.Launcher$AppClassLoader@6f94fa3e 
+Tue Mar 03 09:07:56 EET 2020 : Unexpected exception:
+ {0}
+Tue Mar 03 09:07:56 EET 2020 : For input string: "2-nikos-desktop"
+java.lang.NumberFormatException: For input string: "2-nikos-desktop"
+	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+	at java.lang.Long.parseLong(Long.java:589)
+	at java.lang.Long.parseLong(Long.java:631)
+	at org.apache.derby.impl.store.raw.log.LogToFile.deleteObsoleteLogfiles(Unknown Source)
+	at org.apache.derby.impl.store.raw.log.LogToFile.stop(Unknown Source)
+	at org.apache.derby.impl.services.monitor.TopService.stop(Unknown Source)
+	at org.apache.derby.impl.services.monitor.TopService.shutdown(Unknown Source)
+	at org.apache.derby.impl.services.monitor.BaseMonitor.shutdown(Unknown Source)
+	at org.apache.derby.impl.services.monitor.FileMonitor.shutdown(Unknown Source)
+	at org.apache.derby.impl.services.monitor.BaseMonitor.shutdown(Unknown Source)
+	at org.apache.derby.impl.services.monitor.FileMonitor.shutdown(Unknown Source)
+	at org.apache.derby.jdbc.InternalDriver.connect(Unknown Source)
+	at org.apache.derby.jdbc.InternalDriver.connect(Unknown Source)
+	at org.apache.derby.jdbc.EmbeddedDriver.connect(Unknown Source)
+	at org.apache.derby.impl.drda.NetworkServerControlImpl.blockingStart(Unknown Source)
+	at org.apache.derby.impl.drda.NetworkServerControlImpl.executeWork(Unknown Source)
+	at org.apache.derby.drda.NetworkServerControl.main(Unknown Source)
+Tue Mar 03 09:07:56 EET 2020 : Apache Derby Network Server - 10.11.1.2 - (1629631) shutdown
