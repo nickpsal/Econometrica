@@ -516,6 +516,8 @@ public class InsertDataGUI extends javax.swing.JFrame {
         //Αρχικοποίηση Πίνακα εμφάνισης δεδομένων ή καθαρισμός του Πίνακα
         //σε πρίπτωση που είχαμε ξανακάνει πριν αναζήτηση
         DataDB db = new DataDB();
+        loadDataLabel.setText("ΦΟΡΤΩΣΗ ΔΕΔΟΜΕΝΩΝ");
+        loadDataLabel.setVisible(true);
         // choise είναι το index του combobox.
         // Αν είναι 0 είναι η πρώτη επιλογή του Combobox που είναι ανενεργή 
         if (choise !=0) {
@@ -531,8 +533,6 @@ public class InsertDataGUI extends javax.swing.JFrame {
             progBar.setValue(0);
             timer = new Timer(35, new InsertDataGUI.UpdateBarListener());
             timer.start();
-            loadDataLabel.setText("ΦΟΡΤΩΣΗ ΔΕΔΟΜΕΝΩΝ");
-            loadDataLabel.setVisible(true);
             // Ελεγχος αν υπάρχουν τα δεδομένα της χώρας ήδη στην ΒΔ
             // Επιστρέφει false αν δεν υπάρχουν
             boolean succ = db.checkCountryData(countryCode);
