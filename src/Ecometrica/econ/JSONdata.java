@@ -82,7 +82,6 @@ public class JSONdata {
             LocalDate date = LocalDate.parse(gp.getData().get(i).get(0));
             CountryData dataOIL = new CountryData();
             dataOIL.setDataYear(String.valueOf(date.getYear()));
-            //dataOIL.setValue(df.format(Float.parseFloat(gp.getData().get(i).get(1))));
             dataOIL.setValue(gp.getData().get(i).get(1));
             OILdata.add(dataOIL);    
         }

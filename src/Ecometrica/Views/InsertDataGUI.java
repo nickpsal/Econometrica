@@ -687,7 +687,6 @@ public class InsertDataGUI extends javax.swing.JFrame {
                 OILdata.get(i).getDataYear(),
                 //Φορμαρισμα τιμης να εμφανίζει 2 δεδαδικά
                 df.format(Float.parseFloat(OILdata.get(i).getValue()))
-                //OILdata.get(i).getValue()
             };
             tm2.addRow(row2);
         }
