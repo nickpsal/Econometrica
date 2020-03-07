@@ -18,6 +18,7 @@ public class restApi {
         this.code = code;
         this.key=key;
     }
+    
     //Παίρνουμε τα δεδομένα JSON απο την σελίδα
     //για τα δεδομένα GDP
     public String getDataGDP(String urlGDP) {

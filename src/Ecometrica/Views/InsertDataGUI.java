@@ -71,7 +71,6 @@ public class InsertDataGUI extends javax.swing.JFrame {
         //Δημιουργια Πίνακα με όνοματα χώρας και Πίνακα με
         //κωδικο κάθε χώρας
         jComboBox1.setModel(new DefaultComboBoxModel<>(countries));    
-        jComboBox1.setSelectedItem("GREECE");
         //Αρχικοποίηση ετικετών για τα Όνοματα των Χωρών που επιλέγουμε
         oilCountry.setText("");
         gdpCountry.setText("");
@@ -516,8 +515,6 @@ public class InsertDataGUI extends javax.swing.JFrame {
         //Αρχικοποίηση Πίνακα εμφάνισης δεδομένων ή καθαρισμός του Πίνακα
         //σε πρίπτωση που είχαμε ξανακάνει πριν αναζήτηση
         DataDB db = new DataDB();
-        loadDataLabel.setText("ΦΟΡΤΩΣΗ ΔΕΔΟΜΕΝΩΝ");
-        loadDataLabel.setVisible(true);
         // choise είναι το index του combobox.
         // Αν είναι 0 είναι η πρώτη επιλογή του Combobox που είναι ανενεργή 
         if (choise !=0) {
@@ -527,6 +524,8 @@ public class InsertDataGUI extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(panel, "ΑΔΥΝΑΤΗ ΣΕΝΔΕΣΗ ΣΤΗΝ ΒΑΣΗ ΔΕΔΟΜΕΝΩΝ",
                         "ΣΦΑΛΜΑ", JOptionPane.INFORMATION_MESSAGE);
             }
+            loadDataLabel.setText("ΦΟΡΤΩΣΗ ΔΕΔΟΜΕΝΩΝ");
+            loadDataLabel.setVisible(true);
             //Εμφάνίση ενδειξης προοδου
             progBar.setVisible(true);
             progBar.setStringPainted(true);

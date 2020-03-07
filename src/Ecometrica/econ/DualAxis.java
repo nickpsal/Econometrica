@@ -109,6 +109,7 @@ public class DualAxis extends JFrame {
     private XYDataset createDataset2() {
         final TimeSeries s2 = new TimeSeries("BP OIL Consumption", Year.class);  
         for (int i = 0;i<OILdata.size();i++) {
+            DecimalFormat df = new DecimalFormat("##,##");
             s2.add(new Year(Integer.parseInt(OILdata.get(i).getDataYear())),Float.parseFloat(OILdata.get(i).getValue()));
         }    
         dataset3.addSeries(s2);
