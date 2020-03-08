@@ -41,7 +41,7 @@ public class InsertDataGUI extends javax.swing.JFrame {
     private String countryCode;
     int choise;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    DecimalFormat df = new DecimalFormat("#.##");
+    DecimalFormat df = new DecimalFormat("##.##");
     //api key
     private final String key = "xt8bLEyhssQMhYbri3_C";
     private Date StartDateGDP;
