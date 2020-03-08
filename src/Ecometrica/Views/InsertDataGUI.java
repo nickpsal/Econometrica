@@ -669,11 +669,12 @@ public class InsertDataGUI extends javax.swing.JFrame {
     private void fillTableGDP() {
         //Δημιουργία model για τον Πίνακα
         DefaultTableModel tm1 = (DefaultTableModel) gdpTable.getModel();
+        NumberFormat nf = NumberFormat.getInstance(new Locale("da", "DK"));
         for (int i = 0; i < GDPdata.size(); i++) {
             //Παιρνάμε τιμές στον Πίνακα
             Object[] row1 = {
                 GDPdata.get(i).getDataYear(),
-                GDPdata.get(i).getValue()
+                nf.format(Float.parseFloat(GDPdata.get(i).getValue()))
             };
             tm1.addRow(row1);
         }

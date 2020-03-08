@@ -8,11 +8,12 @@ package Ecometrica.econ;
 import Pojos.CountryData;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  *
@@ -49,6 +50,7 @@ public class JSONdata {
     public List<CountryData> getGDPdata(String responseGDP) {
         List<CountryData> GDPdata = new ArrayList<>();
         GDPandOIL gp = getallData(responseGDP);
+        NumberFormat nf = NumberFormat.getInstance(new Locale("da", "DK"));
         for (int i = 0; i < gp.getData().size(); i++) {
             LocalDate date = LocalDate.parse(gp.getData().get(i).get(0));
             CountryData dataGDP = new CountryData();
