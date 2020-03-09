@@ -517,6 +517,7 @@ public class InsertDataGUI extends javax.swing.JFrame {
         //Αρχικοποίηση Πίνακα εμφάνισης δεδομένων ή καθαρισμός του Πίνακα
         //σε πρίπτωση που είχαμε ξανακάνει πριν αναζήτηση
         DataDB db = new DataDB();
+        EmptyTable();
         // choise είναι το index του combobox.
         // Αν είναι 0 είναι η πρώτη επιλογή του Combobox που είναι ανενεργή 
         if (choise !=0) {
@@ -546,7 +547,6 @@ public class InsertDataGUI extends javax.swing.JFrame {
                 String responseGDP = api.getDataGDP(url1);
                 String responseBP = api.getDataBP(url2);
                 //Εκτύπωση δεδομένων σε περίπτωση που υπάρχουν δεδομένα
-                EmptyTable();
                 ShowDataGDP(responseGDP);
                 ShowDataOIL(responseBP);
             } else {
