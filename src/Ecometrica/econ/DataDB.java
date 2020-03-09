@@ -195,37 +195,45 @@ public class DataDB {
     
     public CountryDataset getDatesGDP(String Ccode, String Country) {
         // Παίρνουμε τις ημερομηνίες Πρωτης και τελευταίας μέτρησης απο την ΒΔ
-        emf = Persistence.createEntityManagerFactory("EconometricaPU");
-        em = emf.createEntityManager();
-        em.getTransaction().begin();
-        CountryDataset dataset = new CountryDataset();
-        String name = "GDP (Current LCU) - " + Country;     
-        country1.setIsoCode(Ccode);
-        dataset1.setCountryCode(country1);
-        TypedQuery<CountryDataset> q1 = em.createQuery("SELECT c FROM CountryDataset c WHERE c.countryCode = :dataset1 AND c.name =:name",CountryDataset.class);
-        q1.setParameter("dataset1", country1);
-        q1.setParameter("name", name);
-        dataset = q1.getSingleResult();
-        em.close();
-        return dataset;
+        try {
+            emf = Persistence.createEntityManagerFactory("EconometricaPU");
+            em = emf.createEntityManager();
+            em.getTransaction().begin();
+            String name = "GDP (Current LCU) - " + Country;     
+            country1.setIsoCode(Ccode);
+            dataset1.setCountryCode(country1);
+            TypedQuery<CountryDataset> q1 = em.createQuery("SELECT c FROM CountryDataset c WHERE c.countryCode = :dataset1 AND c.name =:name",CountryDataset.class);
+            q1.setParameter("dataset1", country1);
+            q1.setParameter("name", name);
+            dataset1 = q1.getSingleResult();
+        }catch (Exception exp) {
+            System.out.println(exp.getMessage());
+        }finally{
+            em.close();
+        }
+        return dataset1;
     }
     
     public CountryDataset getDateOIL(String Ccode, String Country) {
         // Παίρνουμε τις ημερομηνίες Πρωτης και τελευταίας μέτρησης απο την ΒΔ
-        emf = Persistence.createEntityManagerFactory("EconometricaPU");
-        em = emf.createEntityManager();
-        em.getTransaction().begin();
-        CountryDataset dataset = new CountryDataset();
-        String name = "Oil Consumption - " + Country;      
-        country1.setIsoCode(Ccode);
-        dataset1.setCountryCode(country1);
-        TypedQuery<CountryDataset> q2 = em.createQuery("SELECT c FROM CountryDataset c WHERE c.countryCode = :dataset1 AND c.name =:name",CountryDataset.class);
-        q2.setParameter("dataset1", country1);
-        q2.setParameter("name", name);
-        dataset = q2.getSingleResult();
-        System.out.println(dataset.getStartYear());
-        em.close();
-        return dataset;
+        try {
+            emf = Persistence.createEntityManagerFactory("EconometricaPU");
+            em = emf.createEntityManager();
+            em.getTransaction().begin();
+            CountryDataset dataset = new CountryDataset();
+            String name = "Oil Consumption - " + Country;      
+            country1.setIsoCode(Ccode);
+            dataset2.setCountryCode(country1);
+            TypedQuery<CountryDataset> q2 = em.createQuery("SELECT c FROM CountryDataset c WHERE c.countryCode = :dataset1 AND c.name =:name",CountryDataset.class);
+            q2.setParameter("dataset1", country1);
+            q2.setParameter("name", name);
+            dataset2 = q2.getSingleResult();
+        }catch (Exception exp) {
+            System.out.println(exp.getMessage());
+        }finally{
+            em.close();
+        }
+        return dataset2;
     }
     
     public  List<CountryData> getDataGDP(String Ccode, String Country) {
@@ -263,7 +271,6 @@ public class DataDB {
         for (CountryDataset data:dataset) {
             if ((data.getCountryCode().getIsoCode().equalsIgnoreCase(Ccode)) && (data.getName().equalsIgnoreCase(name))){
                 xoraid = data.getDatasetId();
-                System.out.println(xoraid);
             }
         }
         Query q = em.createQuery("SELECT c FROM CountryData c WHERE c.dataset.datasetId = :xoraid ORDER BY c.dataYear DESC",CountryData.class);

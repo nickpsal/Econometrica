@@ -16,7 +16,6 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import javax.swing.JFrame;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -95,12 +94,15 @@ public class DualAxis extends JFrame {
     
     //Τιμές για τα δεδομένα GDP
     private XYDataset createDataset1() {
-        final TimeSeries s1 = new TimeSeries("GDP (Current LCU) Data", Year.class);  
-        for (int i = 0;i<GDPdata.size();i++) {
-            s1.add(new Year(Integer.parseInt(GDPdata.get(i).getDataYear())),Float.parseFloat(GDPdata.get(i).getValue()));
-        }    
-        dataset2.addSeries(s1);
-        return dataset2;
+        if (!GDPdata.isEmpty()) {
+            final TimeSeries s1 = new TimeSeries("GDP (Current LCU) Data", Year.class);  
+            for (int i = 0; i < GDPdata.size(); i++) {
+                s1.add(new Year(Integer.parseInt(GDPdata.get(i).getDataYear())), Float.parseFloat(GDPdata.get(i).getValue()));
+            }
+            dataset2.addSeries(s1);
+            return dataset2;
+        }
+        return null;
     }
     
     //Τιμές για τα δεδομένα OIL COncumption
